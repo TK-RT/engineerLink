@@ -1,0 +1,6 @@
+解答受付中のQ＆Aを表示
+
+<% @questions.each do |question| %>
+	<%= link_to question.question_title, users_question_path(question) %>
+	<%= question.question_body %>
+<% end %>

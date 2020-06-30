@@ -10,7 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_002452) do
+ActiveRecord::Schema.define(version: 2020_06_30_043723) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "user_id"
+    t.text "answer", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer"], name: "index_answers_on_answer"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "article_title", null: false
+    t.text "article_body", null: false
+    t.integer "programming_language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_body"], name: "index_articles_on_article_body"
+    t.index ["article_title"], name: "index_articles_on_article_title"
+    t.index ["programming_language_id"], name: "index_articles_on_programming_language_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "company_name", null: false
+    t.string "main_office", null: false
+    t.string "ceo", null: false
+    t.integer "employee_number"
+    t.date "foundation_date", null: false
+    t.boolean "is_listing", default: true, null: false
+    t.string "hp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_name"], name: "index_companies_on_company_name"
+    t.index ["main_office"], name: "index_companies_on_main_office"
+  end
+
+  create_table "programming_languages", force: :cascade do |t|
+    t.string "programming_language", null: false
+    t.boolean "is_enabled", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "programming_language_id"
+    t.string "question_title"
+    t.text "question_body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "best_answer_id"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000001f00900>"
+    t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
+    t.index ["question_body"], name: "index_questions_on_question_body"
+    t.index ["question_title"], name: "index_questions_on_question_title"
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_002452) do
     t.integer "prefecture", default: 0, null: false
     t.string "address", default: "", null: false
     t.string "phone_number", default: "", null: false
-    t.datetime "deleted_at", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
