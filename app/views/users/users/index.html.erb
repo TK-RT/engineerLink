@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<%= render "users/top/list" %>
+		</div>
+	</div>
+</div>
+
+
+<% @users.each do |user| %>
+<%= user.last_name %> <%= user.first_name %> <%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才 <%= user.prefecture %>
+<% end %>

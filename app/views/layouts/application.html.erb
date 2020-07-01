@@ -10,11 +10,14 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
+    <header>
+      <% if user_signed_in? %>
       <%= link_to "マイページ", "#" %> 
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-    <% end %>
+      <% else %>
+      <% end %> 
+    </header>
+    
     <%= yield %>
   </body>
 </html>
