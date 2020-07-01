@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   namespace :users do
   	resources :users
   	resources :questions
+  	resources :articles
   end
 end

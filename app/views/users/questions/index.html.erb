@@ -1,5 +1,20 @@
 解答受付中のQ＆Aを表示
 
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <%= link_to "解答受付中のQ＆A", users_questions_path %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>
+
 <% @questions.each do |question| %>
 	<%= link_to question.question_title, users_question_path(question) %>
 	<%= question.question_body %>

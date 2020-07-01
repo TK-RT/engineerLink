@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_043723) do
+ActiveRecord::Schema.define(version: 2020_06_30_180820) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,9 +41,11 @@ ActiveRecord::Schema.define(version: 2020_06_30_043723) do
     t.integer "programming_language_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["article_body"], name: "index_articles_on_article_body"
     t.index ["article_title"], name: "index_articles_on_article_title"
     t.index ["programming_language_id"], name: "index_articles_on_programming_language_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|

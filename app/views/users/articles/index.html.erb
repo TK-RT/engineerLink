@@ -1,0 +1,12 @@
+<div class="btn-group" role="group" aria-label="基本のボタングループ">
+  <%= link_to "トップページ", users_questions_path, class: "btn page-link text-dark d-inline-block" %>
+  <%= link_to "Q＆Aを見る", users_questions_path, class: "btn page-link text-dark d-inline-block" %>
+  <%= link_to "記事を見る", users_articles_path, class: "btn page-link text-dark d-inline-block" %>
+  <%= link_to "ユーザー一覧", users_questions_path, class: "btn page-link text-dark d-inline-block" %>
+  <%= link_to "ユーザー検索", users_questions_path, class: "btn page-link text-dark d-inline-block" %>
+  <%= link_to "企業評価を見る", users_questions_path, class: "btn page-link text-dark d-inline-block" %>
+</div>
+<% @articles.each do |article| %>
+	<%= link_to article.article_title, users_article_path(article) %>
+	<%= article.article_body %>
+<% end %>
