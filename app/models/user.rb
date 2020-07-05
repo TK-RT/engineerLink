@@ -6,6 +6,28 @@ class User < ApplicationRecord
 
   has_many :questions, dependent: :destroy
   has_many :articles, dependent: :destroy
+  has_many :answers, dependent: :destroy
+  has_many :post_images, dependent: :destroy
+
+  has_many :relationships
+  has_many :followings, through: :relationships, source: :follow
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "follow_id"
+  has_many :followers, through: :reverse_of_relationships, source: :user
+
+  def follow(other_user)
+    unless self == other_user
+      self.relationships.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    relationship = self.relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
 
   enum prefecture: {
     "--未選択--":0,北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
@@ -16,5 +38,9 @@ class User < ApplicationRecord
     鳥取県:31,島根県:32,岡山県:33,広島県:34,山口県:35,
     徳島県:36,香川県:37,愛媛県:38,高知県:39,
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
+  }
+
+  enum gender: {
+    その他:0,男性:1,女性:2
   }
 end

@@ -1,10 +1,25 @@
 <%= form_with model: @question, url: users_questions_path, local: true do |f| %>
+	<div class="container">
 
-<%= f.label :タイトル %><br />
-<%= f.text_field :question_title %>
+		<div class="row">
+			<div class="col-4 offset-4">
+				<%= f.label :タイトル, class: "h4" %><br />
+				<%= f.text_field :question_title, class: "form-control" %>
+			</div>
+		</div>
 
-<%= f.label :質問内容 %><br />
-<%= f.text_area :question_body %>
+		<div class="row mt-3">
+			<div class="col-4 offset-4" style="height:300px;">
+				<%= f.label :質問内容, class: "h4" %><br />
+				<%= f.text_area :question_body, class: "form-control h-100" %>
+			</div>
+		</div>
 
-<%= f.submit "投稿" %>
+		<div class="row">
+			<div class="col-2  offset-5">
+				<%= f.submit "投稿", class: "btn btn-success btn-block mt-5" %>
+			</div>
+		</div>
+
+	</div>
 <% end %>

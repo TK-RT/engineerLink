@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 														   :last_name_kana,
 														   :first_name_kana,
 														   :birthday,
-														   :is_man,
+														   :gender,
 														   :postcode,
 														   :prefecture,
 														   :address,

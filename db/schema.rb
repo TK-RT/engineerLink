@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_180820) do
+ActiveRecord::Schema.define(version: 2020_07_03_044325) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 2020_06_30_180820) do
     t.index ["main_office"], name: "index_companies_on_main_office"
   end
 
+  create_table "post_images", force: :cascade do |t|
+    t.string "image_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "programming_languages", force: :cascade do |t|
     t.string "programming_language", null: false
     t.boolean "is_enabled", default: true, null: false
@@ -77,11 +84,21 @@ ActiveRecord::Schema.define(version: 2020_06_30_180820) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "best_answer_id"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000001f00900>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000005eeec10>"
     t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
     t.index ["question_body"], name: "index_questions_on_question_body"
     t.index ["question_title"], name: "index_questions_on_question_title"
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,7 +112,7 @@ ActiveRecord::Schema.define(version: 2020_06_30_180820) do
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
     t.date "birthday", null: false
-    t.boolean "is_man", default: true, null: false
+    t.integer "gender", default: 1, null: false
     t.string "postcode", default: "", null: false
     t.integer "prefecture", default: 0, null: false
     t.string "address", default: "", null: false

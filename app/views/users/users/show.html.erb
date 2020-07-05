@@ -1,0 +1,44 @@
+<div class="container">
+	<%= render "users/top/list" %>
+	<div class="row">
+		<div class="col-2 mt-5">
+			<div class="card img-thumbnail">
+				<img class="card-img-top" src="..." alt="画像">
+				<div class="card-body px-2 py-3">
+					<h6 class="card-title text-center"><%= @user.last_name %> <%= @user.first_name %></h5>
+        			<p class="card-text">フォロワー数：＊＊</p>
+        		</div>
+			</div>
+		</div>
+		<div class="col-10 mt-5">
+			<div class="row">
+			<div class="col h4">プロフィール</div>
+			<div class="col-2"><%= link_to "編集する" ,edit_users_user_path(@user), class: "btn btn-primary btn-block" %></div>
+			<div class="col-2"><%= link_to "退会する" ,edit_users_user_path(@user), class: "btn btn-danger btn-block" %></div>
+			</div>
+			
+			<table class="table table-bordered">
+				<tr>
+					<th class="table-primary">名前</th>
+					<td><%= @user.last_name %> <%= @user.first_name %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">フリガナ</th>
+					<td><%= @user.last_name_kana %> <%= @user.first_name_kana %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">性別</th>
+					<td><%= @user.gender %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">年齢</th>
+					<td><%= (Date.today.strftime("%Y%m%d").to_i - @user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才</td>
+				</tr>
+				<tr>
+					<th class="table-primary">居住地</th>
+					<td><%= @user.prefecture %></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

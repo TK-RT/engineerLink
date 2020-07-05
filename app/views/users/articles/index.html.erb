@@ -1,5 +1,26 @@
-<%= render "users/top/list" %>
-<% @articles.each do |article| %>
-	<%= link_to article.article_title, users_article_path(article) %>
-	<%= article.article_body %>
-<% end %>
+<div class="container">
+	<%= render "users/top/list" %><br>
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="border-top-0 h3">記事一覧</th>
+					<th class="border-top-0"></th>
+					<th class="border-top-0"><%= link_to "投稿する", new_users_question_path, class: "btn btn-success" %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @articles.each do |article| %>
+				<tr>
+					<td></td>
+					<td><%= link_to article.article_title, users_article_path(article) %></td>
+					<td><%= article.article_body %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+	
+	

@@ -1,10 +1,58 @@
 <div class="container">
-	<div class="row">
-		<div class="col-3">
-			<%= @question.question_title %>
+	<%= render "users/top/list" %>
+	<div class="row mt-5">
+		<div class="col-2">
+			<table class="table">
+				<tr>
+					<th>言語ジャンル</th>
+				</tr>
+				<tr>
+					<td>言語ジャンル</td>
+				</tr>
+				<tr>
+					<td>言語ジャンル</td>
+				</tr>
+				<tr>
+					<td>言語ジャンル</td>
+				</tr>
+				<tr>
+					<td>言語ジャンル</td>
+				</tr>
+				<tr>
+					<td>言語ジャンル</td>
+				</tr>
+			</table>
 		</div>
-		<div class="col-3">
-			<%= @question.question_body %>
+
+		<div class="col">
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="border-top-0" colspan="2"><%= @question.question_title %></th>
+						<th class="border-top-0"><%= link_to "質問をする", new_users_question_path, class: "btn btn-primary" %></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="3"><%= @question.question_body %></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="border-top-0">閲覧者数：＊＊  解答数：<%= @question.answers.count %>  👍いいね数：＊＊</td>
+						<td></td>
+						<td class="border-top-0"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></td>
+					</tr>
+					
+					<tr>
+						<%= form_with model: [@question, @answer], url: users_question_answers_path, local: true do |f| %>
+						<td><%= f.text_area :answer, class: "form-control", placeholder: "コメントをここに" %></td>
+						<td><%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %></td>
+						<% end %>
+					</tr>
+					
+				</tbody>
+			</table>
 		</div>
+
+		
 	</div>
-</div>

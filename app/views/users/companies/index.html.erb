@@ -1,0 +1,22 @@
+<div class="container">
+	<%= render "users/top/list" %>
+	<div class="row">
+		<div class="col-10 offset-1 mt-3">
+
+			<table class="table">
+				<% @companies.each do |company| %>
+				<tr>
+					<td><%= company.company_name %></td>
+					<td><%= company.main_office %></td>
+					<td><%= company.ceo %></td>
+					<td><%= company.employee_number %></td>
+					<td><%= company.foundation_date %></td>
+					<td><%= company.is_listing %></td>
+					<td><%= company.hp %></td>
+				</tr>
+				<% end %>
+			</table>
+
+		</div>
+	</div>
+</div>
