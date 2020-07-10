@@ -1,22 +1,43 @@
 <div class="container">
 	<%= render "users/top/list" %>
+
+	<%= search_form_for @q, url: users_companies_path do |f| %>
+		<div class="row mt-5">		
+			<div class="col-5 offset-3"><%= f.search_field :company_name_cont, class: "form-control" %></div>
+			<div class="col-1"><%= f.submit "検索", class: "btn btn-primary btn-block" %></div>
+		</div>
+	<% end %>
+	<div class="row">
+		<div class="col-5 offset-3"><%= link_to "=>企業が見つからない場合は企業情報を入力して下さい", new_users_company_path %></div>
+	</div>
+
 	<div class="row">
 		<div class="col-10 offset-1 mt-3">
-
 			<table class="table">
 				<% @companies.each do |company| %>
-				<tr>
-					<td><%= company.company_name %></td>
-					<td><%= company.main_office %></td>
-					<td><%= company.ceo %></td>
-					<td><%= company.employee_number %></td>
-					<td><%= company.foundation_date %></td>
-					<td><%= company.is_listing %></td>
-					<td><%= company.hp %></td>
-				</tr>
+					<tr>
+						<td class="align-middle border-bottom"><%= company.company_name %></td>
+						<% if company.evaluations.count != 0 %>
+							<td class="align-middle border-bottom"><div id="star-rate-<%= company.id %>"></div></td>	
+						<% else %>
+							<td class="align-middle border-bottom"><div id="star-rate-<%= company.id %>"></div></td>
+						<% end %>								
+							<td class="align-middle border-bottom">クチコミ数：<%= company.evaluations.count %></td>
+							<td class="align-middle border-bottom"><%= link_to "詳細を見る", users_company_path(company) %></td>
+					</tr>
+					<script>
+		        	$('#star-rate-<%= company.id %>').raty({
+               	  	size: 36,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= company.evaluations.count == 0 ? 0 : company.evaluations.pluck(:average).sum / company.evaluations.count %>,
+                	});
+					</script>	
 				<% end %>
 			</table>
-
 		</div>
 	</div>
 </div>

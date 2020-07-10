@@ -25,34 +25,84 @@
 		</div>
 
 		<div class="col">
-			<table class="table">
+			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
-						<th class="border-top-0" colspan="2"><%= @question.question_title %></th>
-						<th class="border-top-0"><%= link_to "質問をする", new_users_question_path, class: "btn btn-primary" %></th>
+						<% if @question.user_id == current_user.id %>
+							<th class="border-top-0" colspan="2"><%= @question.question_title %></th>
+							<td class="border-top-0" width="110"><%= link_to "編集する", edit_users_question_path(@question), class: "btn btn-primary text-center" %></td>
+						<% else %>
+							<th class="border-top-0" colspan="3"><%= @question.question_title %></th>
+						<% end %>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="3"><%= @question.question_body %></td>
-						<td></td>
+						<td style="word-wrap:break-word;" colspan="3"><%= @question.question_body %></td>
 					</tr>
 					<tr>
-						<td class="border-top-0">閲覧者数：＊＊  解答数：<%= @question.answers.count %>  👍いいね数：＊＊</td>
-						<td></td>
-						<td class="border-top-0"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></td>
+						<td class="border-top-0 border-bottom" colspan="3">
+							<div class="row pt-3">
+								<div class="col-auto mr-auto"><br>閲覧者数：＊＊
+																  解答数：<%= @question.answers.count %>
+																  <% if @question.favorited_by?(current_user) %>
+																  	<%= link_to users_question_favorites_path(@question), method: :delete do %>
+																  		<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+																  		いいね：<%= @question.favorites.count %>
+																  	<% end %>
+																  <% else %>
+																  	<%= link_to users_question_favorites_path(@question), method: :post do %>
+																  		<i class="fa fa-heart-o" aria-hidden="true"></i>
+																  		いいね：<%= @question.favorites.count %>
+																  	<% end %>
+																  <% end %>
+								</div>
+								<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
+							</div>
+						</td>
 					</tr>
-					
+					<% @question.answers.each do |answer| %>
+					<% if answer.question.best_answer_id == answer.id %>
 					<tr>
-						<%= form_with model: [@question, @answer], url: users_question_answers_path, local: true do |f| %>
-						<td><%= f.text_area :answer, class: "form-control", placeholder: "コメントをここに" %></td>
-						<td><%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %></td>
-						<% end %>
+						<td class="h4 bg-danger">ベストアンサー</td>
 					</tr>
-					
+					<tr>
+						<td class="border-top-0" style="word-wrap:break-word;" colspan="3"><%= answer.answer %></td>
+					</tr>
+					<tr>
+						<td class="border-top-0" colspan="3">
+							<div class="row  justify-content-end pt-3">
+								<div class="col-auto"><br>👍いいね数：＊＊</div>
+								<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
+							</div>
+						</td>
+					</tr>
+					<% else %>
+					<tr>
+						<td style="word-wrap:break-word;" colspan="3"><%= answer.answer %></td>
+					</tr>
+					<tr>
+						<td class="border-top-0 border-bottom" colspan="3">
+							<div class="row  justify-content-end pt-3">
+								<div class="col-auto">
+									<% if answer.question.best_answer_id == answer.id %>
+										<%= link_to "ベストアンサーを選ぶ", users_path(id:@question.id,best_answer_id: answer.id), method: :put, class: "btn btn-danger" %></div>
+									<% else %>
+									
+									<% end %>
+								<div class="col-auto"><br>👍いいね数：＊＊</div>
+								<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
+							</div>
+						</td>
+					</tr>
+					<% end %>
+					<% end %>
 				</tbody>
 			</table>
-		</div>
-
-		
+			<%= form_with model:[@question, @answer], url:users_question_answers_path(@question,@answer) do |f| %>
+				<div class="col mb-4"><%= f.text_area :answer, class: "form-control" %></div>
+				<div class="col-3 m-auto"><%= f.submit "解答する", class: "btn btn-success btn-block" %></div>
+			<% end %>
+		</div>		
 	</div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_044325) do
+ActiveRecord::Schema.define(version: 2020_07_08_060600) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -60,6 +60,39 @@ ActiveRecord::Schema.define(version: 2020_07_03_044325) do
     t.datetime "updated_at", null: false
     t.index ["company_name"], name: "index_companies_on_company_name"
     t.index ["main_office"], name: "index_companies_on_main_office"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "user_id"
+    t.float "average", null: false
+    t.float "working_time", null: false
+    t.float "rewarding", null: false
+    t.float "communication", null: false
+    t.float "holiday", null: false
+    t.float "salary", null: false
+    t.float "growth_environment"
+    t.integer "employment_type", default: 0, null: false
+    t.integer "generation", default: 0, null: false
+    t.integer "enrollment_period", default: 0, null: false
+    t.boolean "is_enrollment", default: true, null: false
+    t.integer "annual_income", null: false
+    t.text "review", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "gender", default: 0, null: false
+    t.index ["company_id"], name: "index_evaluations_on_company_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.integer "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "Article_id"
+    t.index ["Article_id"], name: "index_favorites_on_Article_id"
   end
 
   create_table "post_images", force: :cascade do |t|
@@ -120,6 +153,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_044325) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "profile_image_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["first_name"], name: "index_users_on_first_name"
     t.index ["first_name_kana"], name: "index_users_on_first_name_kana"

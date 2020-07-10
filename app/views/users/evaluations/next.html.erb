@@ -1,0 +1,46 @@
+<%= form_with model:[@company,@evaluation], url:users_company_evaluations_path, method: :post, local: true do |f| %>
+<div class="container">
+
+	<div class="row">
+		<div class="col-3">雇用形態</div>
+		<div class="col-3"><%= f.radio_button :employment_type, :正社員 %>  <%= f.label :正社員 %>  <%= f.radio_button :employment_type, :契約社員 %>  <%= f.label :契約社員 %>  <%= f.radio_button :employment_type, :派遣社員 %>  <%= f.label :派遣社員 %></div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">年齢</div>
+		<div class="col-3"><%= f.select :generation, Evaluation.generations, {prompt: '選択してください'}, class: "custom-select" %></div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">性別</div>
+		<div class="col-3"><%= f.radio_button :gender, :男性 %>  <%= f.label :男 %>  <%= f.radio_button :gender, :女性 %>  <%= f.label :女 %></div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">在籍期間</div>
+		<div class="col-3"><%= f.select :employment_period, Evaluation.employment_periods, {prompt: '選択してください'}, class: "custom-select" %></div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">現在の在籍状況</div>
+		<div class="col-3"><%= f.radio_button :is_enrollment, :true %>  <%= f.label :在籍中 %>  <%= f.radio_button :is_enrollment, :false %>  <%= f.label :退社済 %></div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">在籍時の年収</div>
+		<div class="col-3"><%= f.text_field :annual_income, autofocus: true, class: "form-control" %></div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">口コミ</div>
+		<div class="col-3"><%= f.text_area :review, autofocus: true, class: "form-control" %></div>
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-2 offset-5">
+			<%= f.submit "口コミを投稿", class: "btn btn-success btn-block" %>
+		</div>
+	</div>
+
+</div>
+<% end %>

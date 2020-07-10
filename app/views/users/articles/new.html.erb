@@ -1,16 +1,26 @@
-<div class="container">
-	<div class="row">
-		<div class=col-4>
-			<%= form_with model: @article, url: users_articles_path, local: true do |f| %>
-			<%= f.label :タイトル %><br />
-			<%= f.text_field :article_title %><br />
+<%= form_with model: @article, url: users_articles_path, local: true do |f| %>
+	<div class="container">
 
-			<%= f.label :投稿内容 %><br />
-			<%= f.text_area :article_body %>
-
-			<%= f.submit "投稿" %>
-			<% end %>		
+		<div class="row">
+			<div class="col-4 offset-4">
+				<%= f.label :タイトル, class: "h4" %><br />
+				<%= f.text_field :article_title, class: "form-control" %>
+			</div>
 		</div>
+
+		<div class="row mt-3">
+			<div class="col-4 offset-4" style="height:300px;">
+				<%= f.label :投稿内容, class: "h4" %><br />
+				<%= f.text_area :article_body, class: "form-control h-100" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-2  offset-5">
+				<%= f.submit "投稿", class: "btn btn-success btn-block mt-5" %>
+			</div>
+		</div>
+
 	</div>
 </div>
-	
+<% end %>

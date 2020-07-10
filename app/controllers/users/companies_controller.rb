@@ -1,6 +1,7 @@
 class Users::CompaniesController < ApplicationController
 	def index
-		@companies = Company.all
+		@q = Company.ransack(params[:q])
+		@companies = @q.result(distinct: true)
 	end
 
 	def show

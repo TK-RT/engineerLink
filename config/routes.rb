@@ -7,15 +7,35 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: "users/top#top"
-
+  
   namespace :users do
+  	get "users/search" => "users#search"
+  	put "questions/:id" => "questions#best_answer"
+
   	resources :users
   	resources :questions do
-  		resources :answers, only: [:create, :destroy]
+  		resources :answers, only: [:create, :destroy] do
+  			resource :favorites, only: [:create, :destroy]
+  		end
+  		post "favorites" => "favorites#question_favorite_create", as: "favorites"
+      delete "favorites" => "favorites#question_favorite_destroy"
   	end
-  	resources :articles
+
+  	resources :articles do
+  		resource :favorites, only: [:create, :destroy]
+  	end
+
   	resources :relationships, only: [:create, :destroy]
   	resources :post_images
-  	resources :companies
+
+  	resources :companies do
+	  	resources :evaluations do
+	  		collection do
+	  			get :next
+	  			post :next
+	  		end
+	  	end
+	  end
+
   end
 end

@@ -4,7 +4,7 @@ class Users::AnswersController < ApplicationController
 		answer = current_user.answers.new(answer_params)
 		answer.question_id = question.id
 		answer.save
-		redirect_to question_path(question) 
+		redirect_to users_question_path(question) 
 	end
 
 	private

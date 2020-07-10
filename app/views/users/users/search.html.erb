@@ -1,0 +1,25 @@
+<div class="container">
+	<%= render "users/top/list" %>
+	<%= search_form_for @q, url: users_users_search_path do |f| %>
+	<div class="row m-2">
+	    <div class="col-3"><span class="align-middle">名前</span></div>
+	    <div class="col-3"><%= f.search_field :last_name_cont, class: "form-control" %></div>
+		<div class="col-3"><%= f.search_field :first_name_cont, autofocus: true, autocomplete: "first_name", class: "form-control" %></div>
+	</div>
+
+	<div class="row m-2">
+	    <div class="col-3"><span class="align-middle">年齢</span></div>
+	    <div class="col-2"><%= f.number_field :birthday_gteq, class: "form-control" %></div>歳から
+		<div class="col-2"><%= f.number_field :birthday_lteq, class: "form-control" %></div>未満
+	</div>
+
+	<div class="row m-5">
+    	<div class="col-3 offset-3">
+      		<%= f.submit "検索する", class: "btn btn-success btn-block" %>
+    	</div>
+  	</div>
+	<% end %>
+	<% @users.each do |user| %>
+	<%= user.first_name %>
+	<% end %>
+</div>

@@ -9,31 +9,42 @@
   <nav class="col mt-5">
     <div class="col">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">解決受付中のQ＆A</a>
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">解答受付中のQ＆A</a>
         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">解決済みのQ＆A</a>
         <div class="ml-auto"><%= link_to "質問をする", new_users_question_path, class: "btn btn-success" %></div>
       </div>
     </div>
   </nav>
 
-
+  <!-- 解答受付中のQ＆A -->
   <div class="col tab-content mt-5" id="nav-tabContent">
     <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
       <div class="col">
         <table class="table">
           <tbody>
             <% @questions.each_with_index do |question, i| %>
-              <% if i==0 %>
+              <% if question.best_answer_id == nil %>
+                  <tr>
+                    <td class="border-top-0 border-bottom align-middle text-center"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                    <td class="border-top-0 border-bottom align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 600px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                  </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--解決済みのQ＆A -->  
+    <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="col">
+        <table class="table">
+          <tbody>
+            <% @questions.each_with_index do |question, i| %>
+              <% if question.best_answer_id != nil %>
                 <tr>
-                  <td class="border-top-0"></td>
-                  <td class="border-top-0"><%= link_to question.question_title, users_question_path(question) %></td>
-                  <td class="border-top-0"><%= question.question_body %></td>
-                </tr>
-              <% else %>
-                <tr>
-                  <td></td>
-                  <td><%= link_to question.question_title, users_question_path(question) %></td>
-                  <td><%= question.question_body %></td>
+                  <td class="border-top-0 border-bottom align-middle"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                  <td class="border-top-0 border-bottom align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                  <td class="border-top-0 border-bottom align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= question.question_body %></span></td>
                 </tr>
               <% end %>
             <% end %>
@@ -41,7 +52,6 @@
         </table>
       </div>
     </div>
-  <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">プロフィールの文章です。...</div>
   </div> 
     
 </div>

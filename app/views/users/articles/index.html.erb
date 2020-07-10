@@ -1,26 +1,46 @@
 <div class="container">
-	<%= render "users/top/list" %><br>
-	<div class="row">
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="border-top-0 h3">記事一覧</th>
-					<th class="border-top-0"></th>
-					<th class="border-top-0"><%= link_to "投稿する", new_users_question_path, class: "btn btn-success" %></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @articles.each do |article| %>
-				<tr>
-					<td></td>
-					<td><%= link_to article.article_title, users_article_path(article) %></td>
-					<td><%= article.article_body %></td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
-</div>
 
+  <div class="row">
+    <div class="col">
+      <%= render "users/top/list" %>
+    </div>
+  </div>
+    
+  <nav class="col mt-5">
+    <div class="col">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">投稿一覧</a>
+        <div class="ml-auto"><%= link_to "投稿する", new_users_article_path, class: "btn btn-success" %></div>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="col tab-content mt-5" id="nav-tabContent">
+    <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="col">
+        <table class="table">
+          <tbody>
+            <% @articles.each_with_index do |article, i| %>
+              <% if i==0 %>
+                <tr>
+                  <td class="border-top-0"><%= attachment_image_tag article.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                  <td class="border-top-0"><span class="d-inline-block text-truncate align-middle" style="max-width: 150px;"><%= link_to article.article_title, users_article_path(article) %></span></td>
+                  <td class="border-top-0"><span class="d-inline-block text-truncate align-middle" style="max-width: 150px;"><%= article.article_body %></span></td>
+                </tr>
+              <% else %>
+                <tr>
+                  <td><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                  <td><span class="d-inline-block text-truncate align-middle" style="max-width: 150px;"><%= link_to article.article_title, users_article_path(article) %></span></td>
+                  <td><span class="d-inline-block text-truncate align-middle" style="max-width: 150px;"><%= article.article_body %></span></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>   
+</div>
 	
 	

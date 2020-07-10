@@ -6,7 +6,7 @@ class Users::UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@post_image = PostImage.new
+		@post_image = @user.post_images
 	end
 
 	def edit
@@ -14,6 +14,7 @@ class Users::UsersController < ApplicationController
 		if @user != current_user
 			redirect_to users_user_path(current_user.id)
 		end
+		@post_image = PostImage.new
 	end
 
 	def update
@@ -25,8 +26,13 @@ class Users::UsersController < ApplicationController
 		end
 	end
 
+	def search
+		@q = User.ransack(params[:q])
+		@users = @q.result(distinct: true)
+	end
+
 	private
 	def user_params
-		params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number)
+		params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number, :profile_image)
 	end
 end

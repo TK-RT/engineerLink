@@ -1,0 +1,71 @@
+<div class="container">
+	<%= render "users/top/list" %>
+
+	<div class="row">
+		<div class="col">
+			
+		</div>
+		<div class="col-8">
+			<table class="table table-bordered mt-3">
+				<tr>
+					<th class="table-primary">会社名</th>
+					<td><%= @company.company_name %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">本社所在地</th>
+					<td><%= @company.main_office %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">代表者</th>
+					<td><%= @company.ceo %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">従業員数</th>
+					<td><%= @company.employee_number %>人</td>
+				</tr>
+				<tr>
+					<th class="table-primary">設立年月</th>
+					<td><%= @company.foundation_date %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">上場区分</th>
+					<td><%= @company.is_listing %></td>
+				</tr>
+				<tr>
+					<th class="table-primary">HP</th>
+					<td><%= @company.hp %></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-3">クチコミ一覧</div>
+		<div class="col-3 mr-auto"><%= link_to "口コミを書く", new_users_company_evaluation_path(@company), class: "btn btn-success" %></div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<table class="table">
+				<% @company.evaluations.each do |evaluation| %>
+					<tr>
+						<td><%= evaluation.generation %>／<%= evaluation.gender %><%= evaluation.average %></td>
+						<td><div id="star-rate-<%= evaluation.id %>"></div></td>
+					</tr>
+					<script>
+		        	$('#star-rate-<%= evaluation.id %>').raty({
+               	  	size: 36,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= evaluation.average %>,
+                	});
+					</script>
+				<% end %>
+			</table>
+		</div>
+	</div>
+
+</div>

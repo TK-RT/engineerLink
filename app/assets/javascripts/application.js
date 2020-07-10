@@ -12,8 +12,77 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require jquery
 //= require_tree .
+
+$(function () {
+	$('#star').raty({
+		size: 36,
+		starOff: "/assets/star-off.png",
+		starOn: "/assets/star-on.png",
+		starHalf: "/assets/star-half.png",
+		half: true,
+		scoreName: "evaluation[working_time]"
+	});
+});
+
+$(function () {
+	$('#star1').raty({
+		size: 36,
+		starOff: "/assets/star-off.png",
+		starOn: "/assets/star-on.png",
+		starHalf: "/assets/star-half.png",
+		half: true,
+		scoreName: "evaluation[rewarding]"
+	});
+});
+
+$(function () {
+	$('#star2').raty({
+		size: 36,
+		starOff: "/assets/star-off.png",
+		starOn: "/assets/star-on.png",
+		starHalf: "/assets/star-half.png",
+		half: true,
+		scoreName: "evaluation[communication]"
+	});
+});
+
+$(function () {
+	$('#star3').raty({
+		size: 36,
+		starOff: "/assets/star-off.png",
+		starOn: "/assets/star-on.png",
+		starHalf: "/assets/star-half.png",
+		half: true,
+		scoreName: "evaluation[holiday]"
+	});
+});
+
+$(function () {
+	$('#star4').raty({
+		size: 36,
+		starOff: "/assets/star-off.png",
+		starOn: "/assets/star-on.png",
+		starHalf: "/assets/star-half.png",
+		half: true,
+		scoreName: "evaluation[salary]"
+	});
+});
+
+$(function () {
+	$('#star5').raty({
+		size: 36,
+		starOff: "/assets/star-off.png",
+		starOn: "/assets/star-on.png",
+		starHalf: "/assets/star-half.png",
+		half: true,
+		scoreName: "evaluation[growth_environment]"
+	});
+});
+// $('.star-rate')はクチコミであるため複数個あります.
+// そのため$('.star-rate')の数だけル-プ処理(forEach)を行い,ル-プ処理の中で一つ一つにratyをしてあげる
+// scoreに関してはル-プ処理の中のdata属性から取得する(~.attr('data'))
