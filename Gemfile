@@ -71,3 +71,4 @@ end
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem "ransack"
+gem "chart-js-rails", "~> 0.1.4"

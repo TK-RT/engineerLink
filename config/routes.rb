@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   	end
 
   	resources :articles do
-  		resource :favorites, only: [:create, :destroy]
+  		post "favorites" => "favorites#article_favorite_create", as: "favorites"
+      delete "favorites" => "favorites#article_favorite_destroy"
+      resources :post_comments, only: [:create, :destroy]
   	end
 
   	resources :relationships, only: [:create, :destroy]

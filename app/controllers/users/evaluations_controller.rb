@@ -2,6 +2,7 @@ class Users::EvaluationsController < ApplicationController
 	def new
 		@evaluation = Evaluation.new
 	end
+
 	def next
 		session[:working_time] = evaluation_params[:working_time].to_f
 		session[:rewarding] = evaluation_params[:rewarding].to_f
@@ -11,6 +12,7 @@ class Users::EvaluationsController < ApplicationController
 		session[:growth_environment] = evaluation_params[:growth_environment].to_f
 		@evaluation = Evaluation.new
 	end
+
 	def create
 		evaluation = Evaluation.new(
 			working_time: session[:working_time],
@@ -34,6 +36,11 @@ class Users::EvaluationsController < ApplicationController
 		evaluation.save!
 		redirect_to users_companies_path
 	end
+
+	def show
+		@evaluation = Evaluation.find(params[:id])
+	end
+
 
 	private
 	def evaluation_params

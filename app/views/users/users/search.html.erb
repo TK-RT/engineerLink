@@ -1,16 +1,26 @@
 <div class="container">
 	<%= render "users/top/list" %>
 	<%= search_form_for @q, url: users_users_search_path do |f| %>
-	<div class="row m-2">
-	    <div class="col-3"><span class="align-middle">名前</span></div>
-	    <div class="col-3"><%= f.search_field :last_name_cont, class: "form-control" %></div>
-		<div class="col-3"><%= f.search_field :first_name_cont, autofocus: true, autocomplete: "first_name", class: "form-control" %></div>
+	<div class="row mt-5">
+	    <div class="col-3 d-flex align-items-center">名前</div>
+	    <div class="col-3"><%= f.search_field :last_name_cont, autocomplete: "last_name", placeholder: "姓", class: "form-control" %></div>
+		<div class="col-3"><%= f.search_field :first_name_cont, autofocus: true, autocomplete: "first_name", placeholder: "名", class: "form-control" %></div>
 	</div>
 
-	<div class="row m-2">
-	    <div class="col-3"><span class="align-middle">年齢</span></div>
-	    <div class="col-2"><%= f.number_field :birthday_gteq, class: "form-control" %></div>歳から
-		<div class="col-2"><%= f.number_field :birthday_lteq, class: "form-control" %></div>未満
+	<div class="row mt-2">
+	    <div class="col-3 d-flex align-items-center">年齢</div>
+	    <div class="col-2"><%= f.number_field :birthday_gteq, class: "form-control" %></div><div class="col-1 d-flex align-items-center">歳から</div>
+		<div class="col-2"><%= f.number_field :birthday_lteq, class: "form-control" %></div><div class="col-1 d-flex align-items-center">まで</div>
+	</div>
+
+	<div class="row mt-2">
+		<div class="col-3 d-flex align-items-center">性別</div>
+		<div class="col-2"><%= f.radio_button :gender_eq, 1 %>  <%= f.label :男 %>  <%= f.radio_button :gender_eq, 2 %>  <%= f.label :女 %>  <%= f.radio_button :gender_eq, "", {:checked => true} %>  <%= f.label :問わない %></div>
+	</div>
+
+	<div class="row mt-2">
+		<div class="col-3 d-flex align-items-center">居住地</div>
+		<div class="col-3"><%= f.select :prefecture, User.prefectures.keys.to_a, {prompt: '選択してください'}, class: "custom-select" %></div>
 	</div>
 
 	<div class="row m-5">
@@ -19,7 +29,22 @@
     	</div>
   	</div>
 	<% end %>
-	<% @users.each do |user| %>
-	<%= user.first_name %>
-	<% end %>
+	<div class="row">
+		<div class="col">
+			<table class="table table-hover">
+				<tbody>
+					<% @users.each do |user| %>
+						<tr>
+							<td class="align-middle text-center" width="150"><%= attachment_image_tag user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+							<td class="align-middle" width="300"><%= user.last_name %> <%= user.first_name %></td>
+							<td class="align-middle" width="150"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才</td>
+							<td class="align-middle" width="150"><%= user.prefecture %></td>
+							<td class="align-middle text-center" width="300"><%= render "users/relationships/follow_button", user: user %></td>
+							<td class="align-middle text-center" width="150"><%= link_to "詳細", users_user_path(user) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

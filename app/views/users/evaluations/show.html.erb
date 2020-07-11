@@ -1,0 +1,103 @@
+<div class="container">
+	<%= render "users/top/list" %>
+
+	<div class="row mt-5">
+		<div class="col">
+			
+		</div>
+		<div class="col-8">
+			<table class="table table-bordered mt-3">
+				<tr>
+					<th class="table-primary">労働時間のやりがい</th>
+					<td><div id="star-rate-1"></div></td>
+				</tr>
+				<tr>
+					<th class="table-primary">仕事のやりがい</th>
+					<td><div id="star-rate-2"></div></td>
+				</tr>
+				<tr>
+					<th class="table-primary">社員同士のコミュニケーション</th>
+					<td><div id="star-rate-3"></div></td>
+				</tr>
+				<tr>
+					<th class="table-primary">休日数の満足度</th>
+					<td><div id="star-rate-4"></div></td>
+				</tr>
+				<tr>
+					<th class="table-primary">給与の満足度</th>
+					<td><div id="star-rate-5"></div></td>
+				</tr>
+				<tr>
+					<th class="table-primary">社員の成長環境</th>
+					<td><div id="star-rate-6"></div></td>
+				</tr>
+				<script>
+		        	$('#star-rate-1').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.working_time %>,
+                	});
+				</script>
+				<script>
+		        	$('#star-rate-2').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.rewarding %>,
+                	});
+				</script>
+				<script>
+		        	$('#star-rate-3').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.communication %>,
+                	});
+				</script>
+				<script>
+		        	$('#star-rate-4').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.holiday %>,
+                	});
+				</script>
+				<script>
+		        	$('#star-rate-5').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.salary %>,
+                	});
+				</script>
+				<script>
+		        	$('#star-rate-6').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.growth_environment %>,
+                	});
+				</script>
+			</table>
+		</div>
+	</div>
+</div>

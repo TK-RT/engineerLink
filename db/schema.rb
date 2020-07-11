@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_060600) do
+ActiveRecord::Schema.define(version: 2020_07_10_032346) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -91,8 +91,15 @@ ActiveRecord::Schema.define(version: 2020_07_08_060600) do
     t.integer "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "Article_id"
-    t.index ["Article_id"], name: "index_favorites_on_Article_id"
+    t.integer "article_id"
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "post_images", force: :cascade do |t|
@@ -117,7 +124,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_060600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "best_answer_id"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000005eeec10>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000004d7f9e8>"
     t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
     t.index ["question_body"], name: "index_questions_on_question_body"
     t.index ["question_title"], name: "index_questions_on_question_title"

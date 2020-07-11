@@ -1,7 +1,7 @@
 <div class="container">
 	<%= render "users/top/list" %>
 
-	<div class="row">
+	<div class="row mt-5">
 		<div class="col">
 			
 		</div>
@@ -39,25 +39,26 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-3">クチコミ一覧</div>
-		<div class="col-3 mr-auto"><%= link_to "口コミを書く", new_users_company_evaluation_path(@company), class: "btn btn-success" %></div>
+	<div class="row mt-5">
+		<div class="col-auto mr-auto h3">クチコミ一覧</div>
+		<div class="col-auto"><%= link_to "口コミを書く", new_users_company_evaluation_path(@company), class: "btn btn-success" %></div>
 	</div>
 
-	<div class="row">
+	<div class="row mt-1">
 		<div class="col">
 			<table class="table">
 				<% @company.evaluations.each do |evaluation| %>
 					<tr>
-						<td><%= evaluation.generation %>／<%= evaluation.gender %><%= evaluation.average %></td>
-						<td><div id="star-rate-<%= evaluation.id %>"></div></td>
+						<td class="align-middle" width="400"><%= evaluation.generation %>／<%= evaluation.gender %>／<%= evaluation.employment_type %>／<%= evaluation.enrollment_period %>／<%=evaluation.is_enrollment %><br><div id="star-rate-<%= evaluation.id %>"></div></td>
+						<td class="align-middle"><span class="d-inline-block text-truncate" style="max-width: 500px;"><%= evaluation.review %></span></td>
+						<td class="align-middle" width="150"><%= link_to "詳細を見る", users_company_evaluation_path(@company) %></td>
 					</tr>
 					<script>
 		        	$('#star-rate-<%= evaluation.id %>').raty({
-               	  	size: 36,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+               	  	size: 50,
+                  	starOff:  "/assets/原画star-off.png",
+                  	starOn : "/assets/原画star-on.png",
+                  	starHalf: "/assets/原画star-half.png",
                   	half: true,
                   	readOnly: true,
                   	score: <%= evaluation.average %>,

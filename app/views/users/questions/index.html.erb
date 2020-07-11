@@ -11,7 +11,7 @@
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">解答受付中のQ＆A</a>
         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">解決済みのQ＆A</a>
-        <div class="ml-auto"><%= link_to "質問をする", new_users_question_path, class: "btn btn-success" %></div>
+        <div class="ml-auto"><%= link_to "質問する", new_users_question_path, class: "btn btn-success" %></div>
       </div>
     </div>
   </nav>
@@ -25,8 +25,10 @@
             <% @questions.each_with_index do |question, i| %>
               <% if question.best_answer_id == nil %>
                   <tr>
-                    <td class="border-top-0 border-bottom align-middle text-center"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-                    <td class="border-top-0 border-bottom align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 600px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                    <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                    <td class="border-top-0 border-bottom align-middle" width="500"><span class="d-inline-block text-truncate align-middle" style="max-width: 500px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                    <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
+                    <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
                   </tr>
               <% end %>
             <% end %>
@@ -42,9 +44,10 @@
             <% @questions.each_with_index do |question, i| %>
               <% if question.best_answer_id != nil %>
                 <tr>
-                  <td class="border-top-0 border-bottom align-middle"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-                  <td class="border-top-0 border-bottom align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
-                  <td class="border-top-0 border-bottom align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= question.question_body %></span></td>
+                  <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                  <td class="border-top-0 border-bottom align-middle" width="500"><span class="d-inline-block text-truncate align-middle" style="max-width: 500px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                  <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
+                  <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %>
                 </tr>
               <% end %>
             <% end %>
