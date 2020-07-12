@@ -14,8 +14,11 @@ class Users::CompaniesController < ApplicationController
 
 	def create
 		@company = Company.new(company_params)
-		@company.save
-		redirect_to users_companies_path
+		if @company.save
+			redirect_to users_companies_path
+		else
+			render :new
+		end
 	end
 
 	private

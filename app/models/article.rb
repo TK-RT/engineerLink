@@ -6,4 +6,6 @@ class Article < ApplicationRecord
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
+
+	validates :article_title, :article_body, presence: true
 end

@@ -25,7 +25,7 @@
 		</div>
 
 		<div class="col">
-			<table class="table-bordered" style="table-layout:fixed;width:100%;">
+			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
 						<th class="border-top-0" colspan="2"><%= @article.article_title %></th>
@@ -72,12 +72,9 @@
 				</tbody>
 			</table>
 			<%= form_with model:[@article, @post_comment], url: users_article_post_comments_path(@article), local: true do |f| %>
-			<div class="col mb-4">
-				<%= f.text_area :comment, class: "form-control" %>
-			</div>
-			<div class="col-3 m-auto">
-				<%= f.submit "コメントする", class: "btn btn-success btn-block" %>
-			</div>
+				<%= render 'layouts/error_messages', model: f.object %>
+				<div class="col mb-4"><%= f.text_area :comment, placeholder: "コメントをここに", class: "form-control" %></div>
+				<div class="col-3 m-auto"><%= f.submit "コメントする", class: "btn btn-success btn-block" %></div>
 			<% end %>
 		</div>
 	</div>

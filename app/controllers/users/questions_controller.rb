@@ -6,8 +6,11 @@ class Users::QuestionsController < ApplicationController
 	def create
 		@question = Question.new(question_params)
 		@question.user_id = current_user.id
-		@question.save
-		redirect_to users_questions_path
+		if @question.save
+			redirect_to users_question_path(@question)
+		else
+			render :new
+		end
 	end
 
 	def edit

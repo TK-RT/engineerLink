@@ -1,45 +1,45 @@
 <%= form_with model: @company, url: users_companies_path, local: true do |f| %>
 <div class="container">
+	<%= render 'layouts/error_messages', model: f.object %>
+	<div class="col-2 offset-1 h4">企業情報入力</div>
 
-	<div class="col-2 offset-1">企業情報入力</div>
-
-	 <div class="row m-3">
+	 <div class="row mt-5">
 	 	<div class="col-3"><span class="align-middle">企業名</span></div>
 	 	<div class="col-3"><%= f.text_field :company_name, autofocus: true, class: "form-control" %></div>
 	 </div>
 
-	 <div class="row m-3">
+	 <div class="row mt-3">
 	 	<div class="col-3"><span class="align-middle">本社所在地</span></div>
 	 	<div class="col-6"><%= f.text_field :main_office, autofocus: true, class: "form-control" %></div>
 	 </div>
 
-	 <div class="row m-3">
+	 <div class="row mt-3">
 	 	<div class="col-3"><span class="align-middle">代表者名</span></div>
 	 	<div class="col-3"><%= f.text_field :ceo, autofocus: true, class: "form-control" %></div>
 	 </div>
 
-	 <div class="row m-3">
+	 <div class="row mt-3">
 	 	<div class="col-3"><span class="align-middle">従業員数</span></div>
 	 	<div class="col-3"><%= f.text_field :employee_number, autofocus: true, class: "form-control" %></div>
 	 	<div class="col-1 d-flex align-items-center">人</div>
 	 </div>
 
-	 <div class="row m-3">
+	 <div class="row mt-3">
 	    <div class="col-3"><span class="align-middle">設立年月</span></div>
 	    <div class="col-3"><%= raw sprintf(f.date_select(:foundation_date, use_month_numbers: true, discard_day: true, start_year: 1930, end_year: (Time.now.year), default: Date.new(1989, 1), date_separator: '%s'),'年 ') +'月 ' %></div>
   	</div>
 
-  	<div class="row m-3">
+  	<div class="row mt-3">
 	    <div class="col-3"><span class="align-middle">上場区分</span></div>
 	    <div class="col-3"><%= f.radio_button :is_listing, :true %> <%= f.label :上場 %> <%= f.radio_button :is_listing, :false %> <%= f.label :非上場 %></div>
 	</div>
 
-	<div class="row m-3">
+	<div class="row mt-3">
 	 	<div class="col-3"><span class="align-middle">HPのURL</span></div>
 	 	<div class="col-6"><%= f.text_field :hp, autofocus: true, class: "form-control" %></div>
 	 </div>
 
-	 <div class="row m-5">
+	 <div class="row mt-5">
 	    <div class="col-3 offset-3">
 	      <%= f.submit "企業情報を登録する", class: "btn btn-success btn-block" %>
 	    </div>

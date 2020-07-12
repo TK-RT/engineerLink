@@ -2,10 +2,12 @@
 	<%= render "users/top/list" %>
 
 	<div class="row mt-5">
-		<div class="col">
-			
+		<div class="col-5">
+			<canvas class="text-center" id="myRaderChart" width="200" height="120"></canvas><br>
+			<div class="text-center h4">総合評価</div>
+			<div class="text-center" id="star-rate-1"></div>
 		</div>
-		<div class="col-8">
+		<div class="col-7">
 			<table class="table table-bordered mt-3">
 				<tr>
 					<th class="table-primary">会社名</th>
@@ -49,9 +51,9 @@
 			<table class="table">
 				<% @company.evaluations.each do |evaluation| %>
 					<tr>
-						<td class="align-middle" width="400"><%= evaluation.generation %>／<%= evaluation.gender %>／<%= evaluation.employment_type %>／<%= evaluation.enrollment_period %>／<%=evaluation.is_enrollment %><br><div id="star-rate-<%= evaluation.id %>"></div></td>
+						<td class="align-middle" width="400"><%= evaluation.generation %>／<%= evaluation.gender %>／<%= evaluation.employment_type %>／<%= evaluation.enrollment_period %>／<%= evaluation.is_enrollment %><br><div id="star-rate-<%= evaluation.id %>"></div></td>
 						<td class="align-middle"><span class="d-inline-block text-truncate" style="max-width: 500px;"><%= evaluation.review %></span></td>
-						<td class="align-middle" width="150"><%= link_to "詳細を見る", users_company_evaluation_path(@company) %></td>
+						<td class="align-middle" width="150"><%= link_to "詳細を見る", users_company_evaluation_path(@company,evaluation) %></td>
 					</tr>
 					<script>
 		        	$('#star-rate-<%= evaluation.id %>').raty({
@@ -64,6 +66,48 @@
                   	score: <%= evaluation.average %>,
                 	});
 					</script>
+					<script>
+		        	$('#star-rate-1').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @company.evaluations.pluck(:working_time).sum / @company.evaluations.count %>,
+                	});
+					</script>
+					<script>
+				var ctx = document.getElementById("myRaderChart");
+				var myChart = new Chart(ctx, {
+				  type: 'radar',
+				  data: {
+				    labels: ["労働時間の満足度", "仕事のやりがい", "社員同士のコミュニケーション", "休日数の満足度", "給与の満足度", "社員の成長環境"],
+				    datasets: [{
+				      backgroundColor: "rgba(17,77,217,0.2",
+				      borderColor: "rgba(17,77,217,0.5)",
+				      data: [<%= @company.evaluations.pluck(:working_time).sum / @company.evaluations.count %>,
+				       		 <%= @company.evaluations.pluck(:rewarding).sum / @company.evaluations.count %>,
+				       		 <%= @company.evaluations.pluck(:communication).sum / @company.evaluations.count %>,
+				       		 <%= @company.evaluations.pluck(:holiday).sum / @company.evaluations.count %>,
+				       		 <%= @company.evaluations.pluck(:salary).sum / @company.evaluations.count %>,
+				       		 <%= @company.evaluations.pluck(:growth_environment).sum / @company.evaluations.count %>]
+				    }]
+				  },
+				  options: {
+				  	legend: {
+				  		display: false
+				  	},
+				  	scale: {
+				  		ticks: {
+				  			max: 5,
+				  			min: 0,
+				  			stepSize: 1
+				  		}
+				  	}
+				  }
+				});
+				</script>
 				<% end %>
 			</table>
 		</div>

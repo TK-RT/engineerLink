@@ -2,34 +2,36 @@
 	<%= render "users/top/list" %>
 
 	<div class="row mt-5">
-		<div class="col">
-			
+		<div class="col-5 mt-3">
+			<canvas class="text-center" id="myRaderChart" width="200" height="120"></canvas><br>
+			<div class="text-center h4">総合評価</div>
+			<div class="text-center" id="star-rate-7"></div>
 		</div>
-		<div class="col-8">
+		<div class="col-7">
 			<table class="table table-bordered mt-3">
 				<tr>
-					<th class="table-primary">労働時間のやりがい</th>
-					<td><div id="star-rate-1"></div></td>
+					<th class="table-primary align-middle text-center">労働時間のやりがい</th>
+					<td><div class="text-center" id="star-rate-1"></div></td>
 				</tr>
 				<tr>
-					<th class="table-primary">仕事のやりがい</th>
-					<td><div id="star-rate-2"></div></td>
+					<th class="table-primary align-middle text-center">仕事のやりがい</th>
+					<td><div class="text-center" id="star-rate-2"></div></td>
 				</tr>
 				<tr>
-					<th class="table-primary">社員同士のコミュニケーション</th>
-					<td><div id="star-rate-3"></div></td>
+					<th class="table-primary align-middle text-center">社員同士のコミュニケーション</th>
+					<td><div class="text-center" id="star-rate-3"></div></td>
 				</tr>
 				<tr>
-					<th class="table-primary">休日数の満足度</th>
-					<td><div id="star-rate-4"></div></td>
+					<th class="table-primary align-middle text-center">休日数の満足度</th>
+					<td><div class="text-center" id="star-rate-4"></div></td>
 				</tr>
 				<tr>
-					<th class="table-primary">給与の満足度</th>
-					<td><div id="star-rate-5"></div></td>
+					<th class="table-primary align-middle text-center">給与の満足度</th>
+					<td><div class="text-center" id="star-rate-5"></div></td>
 				</tr>
 				<tr>
-					<th class="table-primary">社員の成長環境</th>
-					<td><div id="star-rate-6"></div></td>
+					<th class="table-primary align-middle text-center">社員の成長環境</th>
+					<td><div class="text-center" id="star-rate-6"></div></td>
 				</tr>
 				<script>
 		        	$('#star-rate-1').raty({
@@ -97,7 +99,55 @@
                   	score: <%= @evaluation.growth_environment %>,
                 	});
 				</script>
+				<script>
+		        	$('#star-rate-7').raty({
+               	  	size: 50,
+                  	starOff:  "/assets/star-off.png",
+                  	starOn : "/assets/star-on.png",
+                  	starHalf: "/assets/star-half.png",
+                  	half: true,
+                  	readOnly: true,
+                  	score: <%= @evaluation.average %>,
+                	});
+				</script>
+				<script>
+				var ctx = document.getElementById("myRaderChart");
+				var myChart = new Chart(ctx, {
+				  type: 'radar',
+				  data: {
+				    labels: ["労働時間の満足度", "仕事のやりがい", "社員同士のコミュニケーション", "休日数の満足度", "給与の満足度", "社員の成長環境"],
+				    datasets: [{
+				      backgroundColor: "rgba(17,77,217,0.2",
+				      borderColor: "rgba(17,77,217,0.5)",
+				      data: [<%= @evaluation.working_time %>,
+				       		 <%= @evaluation.rewarding %>,
+				       		 <%= @evaluation.communication %>,
+				       		 <%= @evaluation.holiday %>,
+				       		 <%= @evaluation.salary %>,
+				       		 <%= @evaluation.growth_environment %>]
+				    }]
+				  },
+				  options: {
+				  	legend: {
+				  		display: false
+				  	},
+				  	scale: {
+				  		ticks: {
+				  			max: 5,
+				  			min: 0,
+				  			stepSize: 1
+				  		}
+				  	}
+				  }
+				});
+				</script>
 			</table>
+		</div>
+	</div>
+	<div class="row mt-5">
+		<div class="col border p-3">
+			<div class="border-bottom"><%= @evaluation.generation %>／<%= @evaluation.gender %>／<%= @evaluation.employment_type %>／<%= @evaluation.enrollment_period %>／<%= @evaluation.is_enrollment %></div>
+			<div class=""><%= @evaluation.review %></div>
 		</div>
 	</div>
 </div>
