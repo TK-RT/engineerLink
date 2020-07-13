@@ -5,7 +5,7 @@ class CreateQuestions < ActiveRecord::Migration[5.2]
       t.references :programming_language, foreign_key: true
       t.string :question_title, index: true
       t.text :question_body, index: true
-      t.integer :best_answer_id, 
+      t.integer :best_answer_id
 
       t.timestamps
     end

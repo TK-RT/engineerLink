@@ -121,10 +121,9 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.integer "programming_language_id"
     t.string "question_title"
     t.text "question_body"
+    t.integer "best_answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "best_answer_id"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x00000000051a0018>"
     t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
     t.index ["question_body"], name: "index_questions_on_question_body"
     t.index ["question_title"], name: "index_questions_on_question_title"
