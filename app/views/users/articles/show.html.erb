@@ -21,7 +21,7 @@
 					<tr>
 						<td class="border-top-0  border-bottom" colspan="3">
 							<div class="row pt-3">
-								<div class="col-auto mr-auto"><br>閲覧者数：＊＊
+								<div class="col-auto mr-auto"><br>
 																  コメント数：<%= @article.post_comments.count %>
 																  <% if @article.favorited_by?(current_user) %>
 																  	<%= link_to users_article_favorites_path(@article), method: :delete do %>
