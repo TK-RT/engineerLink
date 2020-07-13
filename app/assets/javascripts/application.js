@@ -22,9 +22,9 @@
 $(function () {
 	$('#star').raty({
 		size: 36,
-		starOff: 'url<%= asset_path("star-off.png") %>',
-		starOn: 'url<%= asset_path("star-on.png") %>',
-		starHalf: 'url<%= asset_path("star-half.png") %>',
+		starOff: 'url(<%= asset_path "star-off.png" %>)',
+		starOn: 'url(<%= asset_path "star-on.png" %>)',
+		starHalf: 'url(<%= asset_path "star-half.png" %>)',
 		half: true,
 		scoreName: "evaluation[working_time]"
 	});
