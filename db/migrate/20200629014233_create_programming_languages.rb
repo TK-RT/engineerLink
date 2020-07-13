@@ -1,4 +1,4 @@
-class CreateProgrammingLanguages < ActiveRecord::Migration[5.2]
+class CreateProgrammingLanguages < ActiveRecord::Migration[5.0]
   def change
     create_table :programming_languages do |t|
       t.string :programming_language, null: false

@@ -1,4 +1,4 @@
-class CreateQuestions < ActiveRecord::Migration[5.2]
+class CreateQuestions < ActiveRecord::Migration[5.0]
   def change
     create_table :questions do |t|
       t.references :user, type: :bigint, foreign_key: true
