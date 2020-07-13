@@ -22,9 +22,9 @@
 $(function () {
 	$('#star').raty({
 		size: 36,
-		starOff: "/assets/star-off.png",
-		starOn: "/assets/star-on.png",
-		starHalf: "/assets/star-half.png",
+		starOff: '<%= asset_path("star-off.png") %>',
+		starOn: '<%= asset_path("star-on.png") %>',
+		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
 		scoreName: "evaluation[working_time]"
 	});
@@ -33,9 +33,9 @@ $(function () {
 $(function () {
 	$('#star1').raty({
 		size: 36,
-		starOff: "/assets/star-off.png",
-		starOn: "/assets/star-on.png",
-		starHalf: "/assets/star-half.png",
+		starOff: '<%= asset_path("star-off.png") %>',
+		starOn: '<%= asset_path("star-on.png") %>',
+		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
 		scoreName: "evaluation[rewarding]"
 	});
@@ -44,9 +44,9 @@ $(function () {
 $(function () {
 	$('#star2').raty({
 		size: 36,
-		starOff: "/assets/star-off.png",
-		starOn: "/assets/star-on.png",
-		starHalf: "/assets/star-half.png",
+		starOff: '<%= asset_path("star-off.png") %>',
+		starOn: '<%= asset_path("star-on.png") %>',
+		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
 		scoreName: "evaluation[communication]"
 	});
@@ -55,9 +55,9 @@ $(function () {
 $(function () {
 	$('#star3').raty({
 		size: 36,
-		starOff: "/assets/star-off.png",
-		starOn: "/assets/star-on.png",
-		starHalf: "/assets/star-half.png",
+		starOff: '<%= asset_path("star-off.png") %>',
+		starOn: '<%= asset_path("star-on.png") %>',
+		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
 		scoreName: "evaluation[holiday]"
 	});
@@ -66,9 +66,9 @@ $(function () {
 $(function () {
 	$('#star4').raty({
 		size: 36,
-		starOff: "/assets/star-off.png",
-		starOn: "/assets/star-on.png",
-		starHalf: "/assets/star-half.png",
+		starOff: '<%= asset_path("star-off.png") %>',
+		starOn: '<%= asset_path("star-on.png") %>',
+		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
 		scoreName: "evaluation[salary]"
 	});
@@ -77,9 +77,9 @@ $(function () {
 $(function () {
 	$('#star5').raty({
 		size: 36,
-		starOff: "/assets/star-off.png",
-		starOn: "/assets/star-on.png",
-		starHalf: "/assets/star-half.png",
+		starOff: '<%= asset_path("star-off.png") %>',
+		starOn: '<%= asset_path("star-on.png") %>',
+		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
 		scoreName: "evaluation[growth_environment]"
 	});
