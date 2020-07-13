@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["answer"], name: "index_answers_on_answer"
-    t.index ["question_id"], name: "index_answers_on_question_id"
-    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -41,10 +39,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.integer "programming_language_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["article_title"], name: "index_articles_on_article_title"
-    t.index ["programming_language_id"], name: "index_articles_on_programming_language_id"
-    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -80,8 +75,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "gender", default: 0, null: false
-    t.index ["company_id"], name: "index_evaluations_on_company_id"
-    t.index ["user_id"], name: "index_evaluations_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -116,16 +109,14 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.bigint "user_id"
+    t.integer "user_id"
     t.integer "programming_language_id"
     t.string "question_title"
     t.text "question_body"
     t.integer "best_answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
     t.index ["question_title"], name: "index_questions_on_question_title"
-    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -133,9 +124,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.integer "follow_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follow_id"], name: "index_relationships_on_follow_id"
     t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
-    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
