@@ -36,9 +36,9 @@
 				<script>
 		        	$('#star-rate-1').raty({
                	  	size: 50,
-                  	starOff:  asset_path("原画star-off.png"),
-                  	starOn : asset_path("原画star-on.png"),
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.working_time %>,
@@ -47,9 +47,9 @@
 				<script>
 		        	$('#star-rate-2').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.rewarding %>,
@@ -58,9 +58,9 @@
 				<script>
 		        	$('#star-rate-3').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.communication %>,
@@ -69,9 +69,9 @@
 				<script>
 		        	$('#star-rate-4').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.holiday %>,
@@ -80,9 +80,9 @@
 				<script>
 		        	$('#star-rate-5').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.salary %>,
@@ -91,9 +91,9 @@
 				<script>
 		        	$('#star-rate-6').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.growth_environment %>,
@@ -102,9 +102,9 @@
 				<script>
 		        	$('#star-rate-7').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff: '<%= asset_path("star-off.png") %>',
+                  	starOn : '<%= asset_path("star-on.png") %>',
+                  	starHalf: '<%= asset_path("star-half.png") %>',
                   	half: true,
                   	readOnly: true,
                   	score: <%= @evaluation.average %>,
