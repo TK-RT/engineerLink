@@ -21,7 +21,7 @@
 						<% if company.evaluations.count != 0 %>
 							<td class="align-middle border-bottom" width="200"><div id="star-rate-<%= company.id %>"></div></td>	
 						<% else %>
-							<td class="align-middle border-bottom"><div id="star-rate-<%= company.id %>"></div></td>
+							<td class="align-middle border-bottom" width="200"><div id="star-rate-<%= company.id %>"></div></td>
 						<% end %>								
 							<td class="align-middle border-bottom" width="150">クチコミ数：<%= company.evaluations.count %></td>
 							<td class="align-middle border-bottom" width="150"><%= link_to "詳細を見る", users_company_path(company) %></td>

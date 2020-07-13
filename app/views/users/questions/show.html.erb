@@ -1,29 +1,7 @@
 <div class="container">
 	<%= render "users/top/list" %>
 	<div class="row mt-5">
-		<div class="col-2">
-			<table class="table">
-				<tr>
-					<th>言語ジャンル</th>
-				</tr>
-				<tr>
-					<td>言語ジャンル</td>
-				</tr>
-				<tr>
-					<td>言語ジャンル</td>
-				</tr>
-				<tr>
-					<td>言語ジャンル</td>
-				</tr>
-				<tr>
-					<td>言語ジャンル</td>
-				</tr>
-				<tr>
-					<td>言語ジャンル</td>
-				</tr>
-			</table>
-		</div>
-
+		
 		<div class="col">
 			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
@@ -43,7 +21,7 @@
 					<tr>
 						<td class="border-top-0 border-bottom" colspan="3">
 							<div class="row pt-3">
-								<div class="col-auto mr-auto"><br>閲覧者数：＊＊
+								<div class="col-auto mr-auto"><br>
 																  解答数：<%= @question.answers.count %>
 																  <% if @question.favorited_by?(current_user) %>
 																  	<%= link_to users_question_favorites_path(@question), method: :delete do %>
@@ -72,7 +50,6 @@
 							<tr>
 								<td class="border-top-0" colspan="3">
 									<div class="row  justify-content-end pt-3">
-										<div class="col-auto"><br>👍いいね数：＊＊</div>
 										<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
 									</div>
 								</td>
@@ -80,28 +57,32 @@
 						<% end %>
 					<% end %>
 					<% @question.answers.each do |answer| %>
+						<% if @question.best_answer_id != answer.id %>
 						<tr>
 							<td style="word-wrap:break-word;" colspan="3"><%= answer.answer %></td>
 						</tr>	
 						<tr>						
 							<td class="border-top-0 border-bottom" colspan="3">
 								<div class="row  justify-content-end">
-									<% if answer.question.best_answer_id == nil && @question.id == current_user.id %>
+									<% if @question.best_answer_id.blank? && @question.user_id == current_user.id %>
 										<div class="col-auto mr-auto"><%= link_to "ベストアンサーを選ぶ", users_path(id:@question.id,best_answer_id: answer.id), method: :put, class: "btn btn-danger" %></div>
 									<% else %>
 									<% end %>
-									<div class="col-auto"><br>👍いいね数：＊＊</div>
 									<div class="col-auto"><%= answer.created_at.strftime('%Y/%m/%d') %><br>By <%= answer.user.last_name %><%= answer.user.first_name %></div>
 								</div>
 							</td>
-						</tr>	
+						</tr>
+						<% end %>	
 					<% end %>
 				</tbody>
 			</table>
-			<%= form_with model:[@question, @answer], url:users_question_answers_path(@question), local: true do |f| %>
-				<%= render 'layouts/error_messages', model: f.object %>
-				<div class="col mb-4"><%= f.text_area :answer, placeholder: "解答をここに", class: "form-control" %></div>
-				<div class="col-3 m-auto"><%= f.submit "解答する", class: "btn btn-success btn-block" %></div>
+			<% if @question.best_answer_id.blank? %>
+				<%= form_with model:[@question, @answer], url:users_question_answers_path(@question), local: true do |f| %>
+					<%= render 'layouts/error_messages', model: f.object %>
+					<div class="col mb-4"><%= f.text_area :answer, placeholder: "解答をここに", class: "form-control" %></div>
+					<div class="col-3 m-auto"><%= f.submit "解答する", class: "btn btn-success btn-block" %></div>
+				<% end %>
+			<% else %>
 			<% end %>
 		</div>		
 	</div>

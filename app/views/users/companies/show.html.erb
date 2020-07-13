@@ -51,9 +51,9 @@
 			<table class="table">
 				<% @company.evaluations.each do |evaluation| %>
 					<tr>
-						<td class="align-middle" width="400"><%= evaluation.generation %>／<%= evaluation.gender %>／<%= evaluation.employment_type %>／<%= evaluation.enrollment_period %>／<%= evaluation.is_enrollment %><br><div id="star-rate-<%= evaluation.id %>"></div></td>
-						<td class="align-middle"><span class="d-inline-block text-truncate" style="max-width: 500px;"><%= evaluation.review %></span></td>
-						<td class="align-middle" width="150"><%= link_to "詳細を見る", users_company_evaluation_path(@company,evaluation) %></td>
+						<td class="align-middle border-bottom" width="400"><%= evaluation.generation %>／<%= evaluation.gender %>／<%= evaluation.employment_type %>／<%= evaluation.enrollment_period %>／<%= evaluation.is_enrollment %><br><div id="star-rate-<%= evaluation.id %>"></div></td>
+						<td class="align-middle border-bottom"><span class="d-inline-block text-truncate" style="max-width: 500px;"><%= evaluation.review %></span></td>
+						<td class="align-middle border-bottom" width="150"><%= link_to "詳細を見る", users_company_evaluation_path(@company,evaluation) %></td>
 					</tr>
 					<script>
 		        	$('#star-rate-<%= evaluation.id %>').raty({
