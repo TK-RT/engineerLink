@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "best_answer_id"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000000004d7f9e8>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x00000000051a0018>"
     t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
     t.index ["question_body"], name: "index_questions_on_question_body"
     t.index ["question_title"], name: "index_questions_on_question_title"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.string "first_name", default: "", null: false
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
-    t.date "birthday", null: false
+    t.date "birthday"
     t.integer "gender", default: 1, null: false
     t.string "postcode", default: "", null: false
     t.integer "prefecture", default: 0, null: false
