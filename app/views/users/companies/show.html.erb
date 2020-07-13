@@ -58,9 +58,9 @@
 					<script>
 		        	$('#star-rate-<%= evaluation.id %>').raty({
                	  	size: 50,
-                  	starOff:  "/assets/原画star-off.png",
-                  	starOn : "/assets/原画star-on.png",
-                  	starHalf: "/assets/原画star-half.png",
+                  	starOff: asset_path("原画star-off.png"),
+                  	starOn : asset_path("原画star-on.png"),
+                  	starHalf: asset_path("原画star-half.png"),
                   	half: true,
                   	readOnly: true,
                   	score: <%= evaluation.average %>,
@@ -69,9 +69,9 @@
 					<script>
 		        	$('#star-rate-1').raty({
                	  	size: 50,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff:  asset_path("原画star-off.png"),
+                  	starOn : asset_path("原画star-on.png"),
+                  	starHalf: asset_path("原画star-half.png"),
                   	half: true,
                   	readOnly: true,
                   	score: <%= @company.evaluations.pluck(:working_time).sum / @company.evaluations.count %>,
