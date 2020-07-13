@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.text "answer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer"], name: "index_answers_on_answer"
   end
 
   create_table "articles", force: :cascade do |t|
     t.string "article_title", null: false
     t.text "article_body", null: false
     t.integer "programming_language_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_title"], name: "index_articles_on_article_title"
