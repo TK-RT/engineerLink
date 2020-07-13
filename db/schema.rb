@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.index ["article_body"], name: "index_articles_on_article_body"
     t.index ["article_title"], name: "index_articles_on_article_title"
     t.index ["programming_language_id"], name: "index_articles_on_programming_language_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
@@ -117,7 +116,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "programming_language_id"
     t.string "question_title"
     t.text "question_body"
@@ -125,7 +124,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_080008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["programming_language_id"], name: "index_questions_on_programming_language_id"
-    t.index ["question_body"], name: "index_questions_on_question_body"
     t.index ["question_title"], name: "index_questions_on_question_title"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
