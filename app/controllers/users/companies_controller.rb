@@ -1,4 +1,6 @@
 class Users::CompaniesController < ApplicationController
+	before_action :authenticate_user!
+	
 	def index
 		@q = Company.ransack(params[:q])
 		@companies = @q.result(distinct: true)

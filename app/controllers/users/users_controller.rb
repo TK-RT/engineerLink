@@ -1,4 +1,5 @@
 class Users::UsersController < ApplicationController
+	before_action :authenticate_user!
 
 	def index
 		@users = User.all
@@ -33,12 +34,12 @@ class Users::UsersController < ApplicationController
 
 	def destroy
 		@user = User.find(params[:id])
-		@user.destroy(user_params)
+		@user.destroy
 		redirect_to root_path
 	end
 
 	private
 	def user_params
-		params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number, :profile_image, :deleted_at)
+		params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number, :profile_image)
 	end
 end

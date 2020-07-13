@@ -1,4 +1,6 @@
 class Users::EvaluationsController < ApplicationController
+	before_action :authenticate_user!
+	
 	def new
 		@evaluation = Evaluation.new
 	end
