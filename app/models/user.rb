@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+         :recoverable, :rememberable, :validatable
 
   has_many :questions, dependent: :destroy
   has_many :articles, dependent: :destroy
@@ -47,6 +47,8 @@ class User < ApplicationRecord
   enum gender: {
     問わない:0,男性:1,女性:2
   }
+
+  acts_as_paranoid
 
   validates :last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number, presence: true
 end

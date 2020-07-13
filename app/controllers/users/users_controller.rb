@@ -31,8 +31,14 @@ class Users::UsersController < ApplicationController
 		@users = @q.result(distinct: true)
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		@user.destroy(user_params)
+		redirect_to root_path
+	end
+
 	private
 	def user_params
-		params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number, :profile_image)
+		params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :gender, :postcode, :prefecture, :address, :phone_number, :profile_image, :deleted_at)
 	end
 end
