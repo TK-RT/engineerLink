@@ -29,9 +29,9 @@
 					<script>
 		        	$('#star-rate-<%= company.id %>').raty({
                	  	size: 36,
-                  	starOff:  "/assets/star-off.png",
-                  	starOn : "/assets/star-on.png",
-                  	starHalf: "/assets/star-half.png",
+                  	starOff:  asset_path("原画star-off.png"),
+                  	starOn : asset_path("原画star-on.png"),
+                  	starHalf: asset_path("原画star-half.png"),
                   	half: true,
                   	readOnly: true,
                   	score: <%= company.evaluations.count == 0 ? 0 : company.evaluations.pluck(:average).sum / company.evaluations.count %>,
