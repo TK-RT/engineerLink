@@ -28,7 +28,7 @@ $(function () {
 		starOn: '<%= asset_path("star-on.png") %>',
 		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
-		scoreName: "evaluation[communication]"
+		scoreName: evaluation[communication]
 	});
 });
 
@@ -39,7 +39,7 @@ $(function () {
 		starOn: '<%= asset_path("star-on.png") %>',
 		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
-		scoreName: "evaluation[holiday]"
+		scoreName: evaluation[holiday]
 	});
 });
 
@@ -50,7 +50,7 @@ $(function () {
 		starOn: '<%= asset_path("star-on.png") %>',
 		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
-		scoreName: "evaluation[salary]"
+		scoreName: evaluation[salary]
 	});
 });
 
@@ -61,7 +61,7 @@ $(function () {
 		starOn: '<%= asset_path("star-on.png") %>',
 		starHalf: '<%= asset_path("star-half.png") %>',
 		half: true,
-		scoreName: "evaluation[growth_environment]"
+		scoreName: evaluation[growth_environment]
 	});
 });
 // $('.star-rate')はクチコミであるため複数個あります.
