@@ -28,6 +28,26 @@
 					<td class="text-center" id="star5"><%= f.hidden_field :growth_environment %></td>
 				</tr>
 			</table>
+			<script>
+				$('#star').raty({
+					size: 36,
+					starOff: '<%= asset_path("star-off.png") %>',
+					starOn: '<%= asset_path("star-on.png") %>',
+					starHalf: '<%= asset_path("star-half.png") %>',
+					half: true,
+					scoreName: "evaluation[working_time]"
+				});
+			</script>
+			<script>
+				$('#star1').raty({
+					size: 36,
+					starOff: '<%= asset_path("star-off.png") %>',
+					starOn: '<%= asset_path("star-on.png") %>',
+					starHalf: '<%= asset_path("star-half.png") %>',
+					half: true,
+					scoreName: "evaluation[rewarding]"
+				});
+			</script>				
 		</div>
 	</div>
 	<div class="row mt-5">

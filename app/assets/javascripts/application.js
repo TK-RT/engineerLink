@@ -19,27 +19,7 @@
 //= require jquery
 //= require_tree .
 
-$(function () {
-	$('#star').raty({
-		size: 36,
-		starOff: '<%= asset_path("star-off.png") %>',
-		starOn: '<%= asset_path("star-on.png") %>',
-		starHalf: '<%= asset_path("star-half.png") %>',
-		half: true,
-		scoreName: "evaluation[working_time]"
-	});
-});
 
-$(function () {
-	$('#star1').raty({
-		size: 36,
-		starOff: '<%= asset_path("star-off.png") %>',
-		starOn: '<%= asset_path("star-on.png") %>',
-		starHalf: '<%= asset_path("star-half.png") %>',
-		half: true,
-		scoreName: "evaluation[rewarding]"
-	});
-});
 
 $(function () {
 	$('#star2').raty({
