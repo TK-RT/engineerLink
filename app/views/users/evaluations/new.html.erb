@@ -27,8 +27,7 @@
 					<th class="table-primary text-center h6 align-middle">社員の成長環境</th>
 					<td class="text-center" id="star5"><%= f.hidden_field :growth_environment %></td>
 				</tr>
-			</table>
-			<script>
+				<script>
 				$('#star').raty({
 					size: 36,
 					starOff: '<%= asset_path("star-off.png") %>',
@@ -37,17 +36,19 @@
 					half: true,
 					scoreName: evaluation[working_time]
 				});
-			</script>
-			<script>
-				$('#star1').raty({
-					size: 36,
-					starOff: '<%= asset_path("star-off.png") %>',
-					starOn: '<%= asset_path("star-on.png") %>',
-					starHalf: '<%= asset_path("star-half.png") %>',
-					half: true,
-					scoreName: evaluation[rewarding]
-				});
-			</script>				
+				</script>
+				<script>
+					$('#star1').raty({
+						size: 36,
+						starOff: '<%= asset_path("star-off.png") %>',
+						starOn: '<%= asset_path("star-on.png") %>',
+						starHalf: '<%= asset_path("star-half.png") %>',
+						half: true,
+						scoreName: evaluation[rewarding]
+					});
+				</script>	
+			</table>
+						
 		</div>
 	</div>
 	<div class="row mt-5">
