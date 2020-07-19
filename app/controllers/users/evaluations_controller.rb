@@ -35,7 +35,8 @@ class Users::EvaluationsController < ApplicationController
 		company = Company.find(params[:company_id])
 		evaluation.user_id = current_user.id
 		evaluation.company_id = company.id
-		evaluation.save!
+		evaluation.score = Language.get_data(evaluation_params[:review])
+		evaluation.save
 		redirect_to users_companies_path
 	end
 

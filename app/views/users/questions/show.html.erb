@@ -22,18 +22,18 @@
 						<td class="border-top-0 border-bottom" colspan="3">
 							<div class="row pt-3">
 								<div class="col-auto mr-auto"><br>
-																  解答数：<%= @question.answers.count %>
-																  <% if @question.favorited_by?(current_user) %>
-																  	<%= link_to users_question_favorites_path(@question), method: :delete do %>
-																  		<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-																  		いいね：<%= @question.favorites.count %>
-																  	<% end %>
-																  <% else %>
-																  	<%= link_to users_question_favorites_path(@question), method: :post do %>
-																  		<i class="fa fa-heart-o" aria-hidden="true"></i>
-																  		いいね：<%= @question.favorites.count %>
-																  	<% end %>
-																  <% end %>
+									解答数：<%= @question.answers.count %>
+									<% if @question.favorited_by?(current_user) %>
+										<%= link_to users_question_favorites_path(@question), method: :delete do %>
+										<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+										いいね：<%= @question.favorites.count %>
+										<% end %>
+									<% else %>
+										<%= link_to users_question_favorites_path(@question), method: :post do %>
+										<i class="fa fa-heart-o" aria-hidden="true"></i>
+										いいね：<%= @question.favorites.count %>
+										<% end %>
+									<% end %>
 								</div>
 								<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
 							</div>
@@ -48,7 +48,7 @@
 								<td class="border-top-0" style="word-wrap:break-word;" colspan="3"><%= answer.answer %></td>
 							</tr>
 							<tr>
-								<td class="border-top-0" colspan="3">
+								<td class="border-top-0 border-bottom" colspan="3">
 									<div class="row  justify-content-end pt-3">
 										<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
 									</div>
