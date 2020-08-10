@@ -1,6 +1,6 @@
 class Users::QuestionsController < ApplicationController
 	before_action :authenticate_user!
-	
+
 	def new
 		@question = Question.new
 	end
@@ -42,7 +42,16 @@ class Users::QuestionsController < ApplicationController
 	end
 
 	def index
-		@questions = Question.all
+		@q = Question.ransack(params[:q])
+		@questions = @q.result(distinct: true)
+		@programming_languages = ProgrammingLanguage.all
+	end
+
+	def genre_index
+		@q = Question.ransack(params[:q])
+		@questions = @q.result(distinct: true)
+		@programming_languages = ProgrammingLanguage.all
+		@programming_language = ProgrammingLanguage.find(params[:id])
 	end
 
 	def show
@@ -52,6 +61,6 @@ class Users::QuestionsController < ApplicationController
 
 	private
 	def question_params
-		params.require(:question).permit(:user_id, :question_title, :question_body, :best_answer_id)
+		params.require(:question).permit(:user_id, :question_title, :question_body, :programming_language_id, :best_answer_id)
 	end
 end

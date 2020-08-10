@@ -11,13 +11,19 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  namespace :admins do
+    resources :questions
+    resources :programming_languages
+  end
+
   root to: "users/top#top"
-  
+
   namespace :users do
   	get "users/search" => "users#search"
   	put "questions/:id" => "questions#best_answer"
 
   	resources :users
+    get "questions/genre/:id" => "questions#genre_index", as: "questions_genre"
   	resources :questions do
   		resources :answers, only: [:create, :destroy] do
   			resource :favorites, only: [:create, :destroy]

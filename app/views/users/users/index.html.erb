@@ -12,12 +12,12 @@
 				<tbody>
 					<% @users.each do |user| %>
 						<tr>
-							<td><%= attachment_image_tag user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-							<td class="align-middle"><%= user.last_name %> <%= user.first_name %></td>
-							<td class="align-middle"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才</td>
-							<td class="align-middle"><%= user.prefecture %></td>
-							<td class="align-middle"><%= render "users/relationships/follow_button", user: user %></td>
-							<td class="align-middle"><%= link_to "詳細", users_user_path(user) %></td>
+							<td class="align-middle text-center border-bottom" width="150"><%= attachment_image_tag user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+							<td class="align-middle border-bottom" width="300"><%= user.last_name %> <%= user.first_name %></td>
+							<td class="align-middle border-bottom" width="150"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才</td>
+							<td class="align-middle border-bottom" width="150"><%= user.prefecture %></td>
+							<td class="align-middle text-center border-bottom" width="300"><%= render "users/relationships/follow_button", user: user %></td>
+							<td class="align-middle text-center border-bottom" width="150"><%= link_to "詳細", users_user_path(user) %></td>
 						</tr>
 					<% end %>
 				</tbody>

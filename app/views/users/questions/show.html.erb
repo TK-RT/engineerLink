@@ -3,12 +3,12 @@
 	<div class="row mt-5">
 		
 		<div class="col">
-			<table class="table" style="table-layout:fixed;width:100%;">
+			<table class="table-bordered" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
 						<% if @question.user_id == current_user.id %>
 							<th class="border-top-0" colspan="2"><%= @question.question_title %></th>
-							<td class="border-top-0" width="110"><%= link_to "編集する", edit_users_question_path(@question), class: "btn btn-primary text-center" %></td>
+							<td class="border-top-0 text-center" width="110"><%= link_to "編集する", edit_users_question_path(@question), class: "btn btn-primary" %></td>
 						<% else %>
 							<th class="border-top-0" colspan="3"><%= @question.question_title %></th>
 						<% end %>
@@ -19,25 +19,13 @@
 						<td style="word-wrap:break-word;" colspan="3"><%= @question.question_body %></td>
 					</tr>
 					<tr>
-						<td class="border-top-0 border-bottom" colspan="3">
-							<div class="row pt-3">
-								<div class="col-auto mr-auto"><br>
-									解答数：<%= @question.answers.count %>
-									<% if @question.favorited_by?(current_user) %>
-										<%= link_to users_question_favorites_path(@question), method: :delete do %>
-										<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-										いいね：<%= @question.favorites.count %>
-										<% end %>
-									<% else %>
-										<%= link_to users_question_favorites_path(@question), method: :post do %>
-										<i class="fa fa-heart-o" aria-hidden="true"></i>
-										いいね：<%= @question.favorites.count %>
-										<% end %>
-									<% end %>
-								</div>
-								<div class="col-auto"><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></div>
+						<td colspan="2">
+							<div class="row">
+								<div class="col-2">解答数：<%= @question.answers.count %></div>
+								<div class="col-2" id="question-favorites"><%= render "users/favorites/favorites", question: @question %></div>
 							</div>
 						</td>
+						<td><%= @question.created_at.strftime('%Y/%m/%d') %><br>By <%= @question.user.last_name %><%= @question.user.first_name %></td>
 					</tr>
 					<% @question.answers.each do |answer| %>
 						<% if @question.best_answer_id == answer.id %>

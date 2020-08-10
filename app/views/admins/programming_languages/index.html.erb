@@ -1,0 +1,41 @@
+<div class="container">
+
+	<div class="row">
+		<div class="col-4 offset-3 h4">言語ジャンル一覧・追加</div>
+	</div>
+
+	<%= form_with model: @programming_language, url: admins_programming_languages_path, local: true do |f| %>
+		<div class="row mt-5">
+			<div class="col-3 offset-3"><%= f.text_field :programming_language, class: "form-control" %></div>
+			<div class="col-1"><%= f.radio_button :is_enabled, :有効 %> <%= f.label :有効 %></div>
+			<div class="col-1"><%= f.radio_button :is_enabled, :無効 %> <%= f.label :無効 %></div>
+			<div class="col-1"><%= f.submit "追加", class: "btn btn-primary btn-block" %></div>
+		</div>
+	<% end %>
+
+	<div class="row mt-5">
+		<div class="col-6 offset-3">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th>言語</th>
+						<th>状態</th>
+						<th width="50"></th>
+						<th width="50"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @programming_languages.each do |programming_language| %>
+						<tr>
+							<td class="align-middle border-bottom"><%= programming_language.programming_language %></td>
+							<td class="align-middle border-bottom"><%= programming_language.is_enabled %></td>
+							<td class="align-middle border-bottom"><%= link_to "編集", edit_admins_programming_language_path(programming_language), class: "btn btn-primary" %></td>
+							<td class="align-middle border-bottom"><%= link_to "削除", admins_programming_language_path(programming_language), method: :delete, data: { confirm: "本当に削除しますか？"}, class: "btn btn-danger" %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</div>
+		</div>
+	</div>
+
+</div>
