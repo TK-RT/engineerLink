@@ -20,7 +20,8 @@ class Users::UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		if @user.update(user_params)
+		if @user == current_user
+			@user.update(user_params)
 			redirect_to users_user_path(@user)
 		else
 			render :edit
@@ -34,8 +35,12 @@ class Users::UsersController < ApplicationController
 
 	def destroy
 		@user = User.find(params[:id])
-		@user.destroy
-		redirect_to root_path
+		if @user == current_user
+			@user.destroy
+			redirect_to root_path
+		else
+			redirect_to users_user_path(@user)
+		end
 	end
 
 	private
