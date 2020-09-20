@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+
 	belongs_to :user
 	belongs_to :programming_language
 	has_many :answers, dependent: :destroy
