@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<th class="table-primary">設立年月</th>
-					<td><%= @company.foundation_date %></td>
+					<td><%= @company.foundation_date.strftime("%Y年%m月") %></td>
 				</tr>
 				<tr>
 					<th class="table-primary">上場区分</th>
