@@ -13,14 +13,16 @@
 		<div class="col-9 mt-5">
 			<h3>解答受付中のQ＆A</h3>
 			<table class="table">
-				<% @questions[1..3].each do |question| %>
-					<% if question.best_answer_id == nil %>
-						<tr>
-							<td class="border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-							<td class="border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
-							<td class="border-bottom align-middle" width="100">解答数：<%= question.answers.count %></td>
-		                    <td class="border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
-						</tr>
+				<% if @questions.present? %>
+					<% @questions[1..3].each do |question| %>
+						<% if question.best_answer_id == nil %>
+							<tr>
+								<td class="border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+								<td class="border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+								<td class="border-bottom align-middle" width="100">解答数：<%= question.answers.count %></td>
+			                    <td class="border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
+							</tr>
+						<% end %>
 					<% end %>
 				<% end %>
 			</table>
