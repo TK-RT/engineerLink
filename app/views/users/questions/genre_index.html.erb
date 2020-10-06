@@ -1,98 +1,94 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col">
-      <%= render "users/top/list" %>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col-2 mt-5">
-      <table class="table table-borderless border">
-        <thead class="thead-light">
-          <tr>
-            <th class="border-bottom text-center">言語ジャンル</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @programming_languages.each do |programming_language| %>
-          <tr>
-            <td><%= link_to programming_language.programming_language, users_questions_genre_path(programming_language) %></td>
-          </tr>
-        <% end %>
-        <tr>
-          <td>その他</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row">
+        <div class="col">
+            <%= render "users/top/list" %>
+        </div>
     </div>
 
-    <div class="col-10 mt-5">
-      <nav class="col">
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">解答受付中のQ＆A</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">解決済みのQ＆A</a>
-          <div class="ml-auto">
-            <%= search_form_for @q, url: users_questions_genre_path(@programming_language) do |f| %>
-              <div class="form-inline">
-                <%= f.search_field :question_title_or_question_body_cont, class: "form-control" %>
-                <%= f.hidden_field :programming_language_id_eq, value: @programming_language_id %>
-                <%= f.submit "検索", class: "btn btn-primary ml-2" %>
-                <%= link_to "質問する", new_users_question_path, class: "btn btn-success ml-5" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </nav>
+    <div class="row">
 
-      <!-- 解答受付中のQ＆A -->
-      <div class="col tab-content mt-5" id="nav-tabContent">
-        <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <div class="col">
-            <table class="table">
-              <tbody>
-                <% @questions.each_with_index do |question, i| %>
-                  <% if question.best_answer_id == nil && question.programming_language_id == @programming_language.id %>
-                      <tr>
-                        <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-                        <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
-                        <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
-                        <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
-                      </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!--解決済みのQ＆A -->
-        <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <div class="col">
-            <table class="table">
-              <tbody>
-                <% @programming_language.questions.each_with_index do |question, i| %>
-                  <% if question.best_answer_id != nil %>
+        <div class="col-2 mt-5">
+            <table class="table table-borderless border">
+                <thead class="thead-light">
                     <tr>
-                      <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-                      <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
-                      <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
-                      <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %>
+                        <th class="border-bottom text-center">言語ジャンル</th>
                     </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
+                </thead>
+                <tbody>
+                    <% @programming_languages.each do |programming_language| %>
+                        <tr>
+                            <td><%= link_to programming_language.programming_language, users_questions_genre_path(programming_language) %></td>
+                        </tr>
+                    <% end %>
+                        <tr>
+                            <td>その他</td>
+                        </tr>
+                </tbody>
             </table>
-          </div>
         </div>
-      </div>
 
-      <div class="col-4 offset-4">
-        <%= paginate @questions %>
-      </div>
+        <div class="col-10 mt-5">
+            <nav class="col">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">解答受付中のQ＆A</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">解決済みのQ＆A</a>
+                    <div class="ml-auto">
+                        <%= search_form_for @q, url: users_questions_genre_path(@programming_language) do |f| %>
+                            <div class="form-inline">
+                                <%= f.search_field :question_title_or_question_body_cont, class: "form-control" %>
+                                <%= f.hidden_field :programming_language_id_eq, value: @programming_language_id %>
+                                <%= f.submit "検索", class: "btn btn-primary ml-2" %>
+                                <%= link_to "質問する", new_users_question_path, class: "btn btn-success ml-5" %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </nav>
 
+            <!-- 解答受付中のQ＆A -->
+            <div class="col tab-content mt-5" id="nav-tabContent">
+                <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="col">
+                        <table class="table">
+                            <tbody>
+                                <% @questions.each_with_index do |question, i| %>
+                                    <% if question.best_answer_id == nil && question.programming_language_id == @programming_language.id %>
+                                        <tr>
+                                            <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                                            <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                                            <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
+                                            <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
+                                        </tr>
+                                    <% end %>
+                                <% end %>
+                            </tbody>
+                        </table>
+                        <div class="col offset-4"><%= paginate @questions %></div>
+                    </div>
+
+                </div>
+            <!--解決済みのQ＆A -->
+            <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="col">
+                    <table class="table">
+                        <tbody>
+                            <% @programming_language.questions.each_with_index do |question, i| %>
+                                <% if question.best_answer_id != nil %>
+                                    <tr>
+                                        <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                                        <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                                        <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
+                                        <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %>
+                                    </tr>
+                                <% end %>
+                            <% end %>
+                        </tbody>
+                    </table>
+                    <div class="col offset-4"><%= paginate @questions %></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </div>
-  
 </div>

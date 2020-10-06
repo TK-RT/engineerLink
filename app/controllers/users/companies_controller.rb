@@ -3,7 +3,7 @@ class Users::CompaniesController < ApplicationController
 	
 	def index
 		@q = Company.ransack(params[:q])
-		@companies = @q.result(distinct: true)
+		@companies = @q.result(distinct: true).order(created_at: :"DESC")
 	end
 
 	def show

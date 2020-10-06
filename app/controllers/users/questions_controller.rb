@@ -48,10 +48,10 @@ class Users::QuestionsController < ApplicationController
 	end
 
 	def genre_index
-		@q = Question.ransack(params[:q])
-		@questions = @q.result(distinct: true).page(params[:page])
 		@programming_languages = ProgrammingLanguage.all
 		@programming_language = ProgrammingLanguage.find(params[:id])
+		@q = Question.ransack(params[:q])
+		@questions = @q.result(distinct: true).where(programming_language_id: @programming_language).page(params[:page]).order(id: :DESC)
 	end
 
 	def show

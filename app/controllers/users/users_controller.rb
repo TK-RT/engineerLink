@@ -2,7 +2,7 @@ class Users::UsersController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@users = User.page(params[:page])
+		@users = User.order(created_at: :"DESC").page(params[:page])
 	end
 
 	def show
@@ -30,7 +30,7 @@ class Users::UsersController < ApplicationController
 
 	def search
 		@q = User.ransack(params[:q])
-		@users = @q.result(distinct: true)
+		@users = @q.result(distinct: true).order(created_at: :"DESC")
 	end
 
 	def destroy
