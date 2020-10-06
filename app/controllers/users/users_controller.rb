@@ -30,7 +30,7 @@ class Users::UsersController < ApplicationController
 
 	def search
 		@q = User.ransack(params[:q])
-		@users = @q.result(distinct: true).order(created_at: :"DESC")
+		@users = @q.result(distinct: true).order(created_at: :"DESC").page(params[:page])
 	end
 
 	def destroy
