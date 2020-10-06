@@ -3,7 +3,7 @@
 	<div class="row mt-5">
 
 		<div class="col">
-			<table class="table-bordered" style="table-layout:fixed;width:100%;">
+			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
 						<th class="border-top-0" colspan="2"><%= @article.article_title %></th>
@@ -16,7 +16,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td style="word-wrap:break-word;" colspan="3"><%= @article.article_body %></td>
+						<td style="word-wrap:break-word;" colspan="3"><%= safe_join(@article.article_body.split("\n"), tag(:br)) %></td>
 					</tr>
 					<tr>
 						<td class="border-top-0  border-bottom" colspan="2">
@@ -29,7 +29,7 @@
 					</tr>
 					<% @article.post_comments.each do |post_comment| %>
 					<tr>
-						<td colspan="3"><%= post_comment.comment %></td>
+						<td colspan="3"><%= safe_join(post_comment.comment.split("\n"), tag(:br)) %></td>
 					</tr>
 					<tr>
 						<td class="text-right border-top-0  border-bottom" colspan="3"><%= post_comment.created_at.strftime('%Y/%m/%d') %><br>By <%= post_comment.user.last_name %><%= post_comment.user.first_name %></td>

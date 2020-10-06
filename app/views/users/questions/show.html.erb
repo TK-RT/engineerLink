@@ -3,7 +3,7 @@
 	<div class="row mt-5">
 		
 		<div class="col">
-			<table class="table-bordered" style="table-layout:fixed;width:100%;">
+			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
 						<% if @question.user_id == current_user.id %>
@@ -16,7 +16,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td style="word-wrap:break-word;" colspan="3"><%= @question.question_body %></td>
+						<td style="word-wrap:break-word;" colspan="3"><%= safe_join(@question.question_body.split("\n"), tag(:br)) %></td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -33,7 +33,7 @@
 								<td class="h4 bg-danger" colspan="3">ベストアンサー</td>
 							</tr>
 							<tr>
-								<td class="border-top-0" style="word-wrap:break-word;" colspan="3"><%= answer.answer %></td>
+								<td class="border-top-0" style="word-wrap:break-word;" colspan="3"><%= safe_join(answer.answer.split("\n"), tag(:br)) %></td>
 							</tr>
 							<tr>
 								<td class="border-top-0 border-bottom" colspan="3">
@@ -47,9 +47,9 @@
 					<% @question.answers.each do |answer| %>
 						<% if @question.best_answer_id != answer.id %>
 						<tr>
-							<td style="word-wrap:break-word;" colspan="3"><%= answer.answer %></td>
-						</tr>	
-						<tr>						
+							<td style="word-wrap:break-word;" colspan="3"><%= safe_join(answer.answer.split("\n"), tag(:br)) %></td>
+						</tr>
+						<tr>
 							<td class="border-top-0 border-bottom" colspan="3">
 								<div class="row  justify-content-end">
 									<% if @question.best_answer_id.blank? && @question.user_id == current_user.id %>
