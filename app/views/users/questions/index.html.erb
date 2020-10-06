@@ -62,7 +62,7 @@
                         </table>
                     </div>
                     <div class="col offset-4">
-                         <%= paginate @questions %>
+                         <%= paginate @questions, :param_name => "question_page" %>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                     <div class="col">
                         <table class="table">
                             <tbody>
-                            <% @questions.each_with_index do |question, i| %>
+                            <% @solved_questions.each_with_index do |question, i| %>
                                 <% if question.best_answer_id != nil %>
                                     <tr>
                                         <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
@@ -85,7 +85,7 @@
                         </table>
                     </div>
                     <div class="col offset-4">
-                         <%= paginate @questions %>
+                         <%= paginate @solved_questions, :param_name => "solved_question_page" %>
                     </div>
                 </div>
             </div>

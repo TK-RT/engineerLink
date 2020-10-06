@@ -53,18 +53,16 @@
                         <table class="table">
                             <tbody>
                                 <% @questions.each_with_index do |question, i| %>
-                                    <% if question.best_answer_id == nil && question.programming_language_id == @programming_language.id %>
-                                        <tr>
-                                            <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-                                            <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
-                                            <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
+                                    <tr>
+                                        <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+                                        <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+                                        <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
                                             <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
-                                        </tr>
-                                    <% end %>
+                                    </tr>
                                 <% end %>
                             </tbody>
                         </table>
-                        <div class="col offset-4"><%= paginate @questions %></div>
+                        <div class="col offset-4"><%= paginate @questions, :param_name => "question_page" %></div>
                     </div>
 
                 </div>
@@ -73,19 +71,17 @@
                 <div class="col">
                     <table class="table">
                         <tbody>
-                            <% @programming_language.questions.each_with_index do |question, i| %>
-                                <% if question.best_answer_id != nil %>
+                            <% @solved_questions.each_with_index do |question, i| %>
                                     <tr>
                                         <td class="border-top-0 border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
                                         <td class="border-top-0 border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
                                         <td class="border-top-0 border-bottom align-middle" width="150">解答数：<%= question.answers.count %></td>
                                         <td class="border-top-0 border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %>
                                     </tr>
-                                <% end %>
                             <% end %>
                         </tbody>
                     </table>
-                    <div class="col offset-4"><%= paginate @questions %></div>
+                    <div class="col offset-4"><%= paginate @solved_questions, :param_name => "solved_question_page" %></div>
                 </div>
             </div>
         </div>

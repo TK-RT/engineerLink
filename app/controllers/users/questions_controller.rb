@@ -43,7 +43,8 @@ class Users::QuestionsController < ApplicationController
 
 	def index
 		@q = Question.ransack(params[:q])
-		@questions = @q.result(distinct: true).page(params[:page]).order(id: :DESC)
+		@questions = @q.result(distinct: true).where(best_answer_id: nil).page(params[:question_page]).order(id: :DESC)
+		@solved_questions = @q.result(distinct: true).where.not(best_answer_id: nil).page(params[:solved_question_page]).order(id: :DESC)
 		@programming_languages = ProgrammingLanguage.all
 	end
 
@@ -51,7 +52,8 @@ class Users::QuestionsController < ApplicationController
 		@programming_languages = ProgrammingLanguage.all
 		@programming_language = ProgrammingLanguage.find(params[:id])
 		@q = Question.ransack(params[:q])
-		@questions = @q.result(distinct: true).where(programming_language_id: @programming_language).page(params[:page]).order(id: :DESC)
+		@questions = @q.result(distinct: true).where(programming_language_id: @programming_language, best_answer_id: nil).page(params[:question_page]).order(id: :DESC)
+		@solved_questions = @q.result(distinct: true).where(programming_language_id: @programming_language).where.not(best_answer_id: nil).page(params[:solved_question_page]).order(id: :DESC)
 	end
 
 	def show
