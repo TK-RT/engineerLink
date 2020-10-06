@@ -6,26 +6,26 @@
 			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
-						<th class="border-top-0" colspan="2"><%= @article.article_title %></th>
-						<td class="border-top-0 text-center" width="110">
-							<% if @article.user_id == current_user.id %>
-								<%= link_to "編集する", edit_users_article_path(@article), class: "btn btn-primary text-center" %></td>
-							<% else %>
-							<% end %>
+						<% if @article.user_id == current_user.id %>
+							<th class="border-top-0" colspan="2"><%= @article.article_title %></th>
+							<td class="border-top-0 text-center" width="110"><%= link_to "編集する", edit_users_article_path(@article), class: "btn btn-primary" %></td>
+						<% else %>
+							<th class="border-top-0" colspan="3"><%= @article.article_title %></th>
+						<% end %>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td style="word-wrap:break-word;" colspan="3"><%= safe_join(@article.article_body.split("\n"), tag(:br)) %></td>
 					</tr>
-					<tr>
-						<td class="border-top-0  border-bottom" colspan="2">
+					<tr class="border-bottom">
+						<td colspan="2">
 							<div class="row">
-								<div class="col-2">コメント数：<%= @article.post_comments.count %></div>
+								<div class="col-3">コメント数：<%= @article.post_comments.count %></div>
 								<div class="col-2" id="article-favorites"><%= render "users/favorites/favorites", article: @article %></div>
 							</div>
 						</td>
-						<td><%= @article.created_at.strftime('%Y/%m/%d') %><br>By <%= @article.user.last_name %><%= @article.user.first_name %></td>
+						<td class="text-right"><%= @article.created_at.strftime('%Y/%m/%d') %><br>By <%= @article.user.last_name %><%= @article.user.first_name %></td>
 					</tr>
 					<% @article.post_comments.each do |post_comment| %>
 					<tr>
