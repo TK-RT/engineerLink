@@ -15,14 +15,12 @@
 			<table class="table">
 				<% if @questions.present? %>
 					<% @questions[0..2].each do |question| %>
-						<% if question.best_answer_id == nil %>
-							<tr>
-								<td class="border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-								<td class="border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
-								<td class="border-bottom align-middle" width="100">解答数：<%= question.answers.count %></td>
-			                    <td class="border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
-							</tr>
-						<% end %>
+						<tr>
+							<td class="border-bottom align-middle text-center" width="150"><%= attachment_image_tag question.user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+							<td class="border-bottom align-middle" width="300"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= link_to question.question_title, users_question_path(question) %></span></td>
+							<td class="border-bottom align-middle" width="100">解答数：<%= question.answers.count %></td>
+		                    <td class="border-bottom align-middle" width="150"><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいね数：<%= question.favorites.count %></td>
+						</tr>
 					<% end %>
 				<% end %>
 			</table>
@@ -30,17 +28,15 @@
 
 			<h3 class="mt-5">新しく登録したユーザー</h3>
 			<table class="table">
-				<% @users[0..3].each do |user| %>
-					<% if user.id != current_user.id %>
-						<tr>
-							<td class="align-middle text-center border-bottom" width="150"><%= attachment_image_tag user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
-							<td class="align-middle border-bottom" width="300"><%= user.last_name %> <%= user.first_name %></td>
-							<td class="align-middle border-bottom" width="150"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才</td>
-							<td class="align-middle border-bottom" width="150"><%= user.prefecture %></td>
-							<td class="align-middle text-center border-bottom" width="300"><%= render "users/relationships/follow_button", user: user %></td>
-							<td class="align-middle text-center border-bottom" width="150"><%= link_to "詳細", users_user_path(user) %></td>
-						</tr>
-					<% end %>
+				<% @users[0..2].each do |user| %>
+					<tr>
+						<td class="align-middle text-center border-bottom" width="150"><%= attachment_image_tag user, :profile_image, format: "jpg", size: "50x50", fallback: "no_image.jpg" %></td>
+						<td class="align-middle border-bottom" width="300"><%= user.last_name %> <%= user.first_name %></td>
+						<td class="align-middle border-bottom" width="150"><%= (Date.today.strftime("%Y%m%d").to_i - user.birthday.strftime("%Y%m%d").to_i) / 10000  %>才</td>
+						<td class="align-middle border-bottom" width="150"><%= user.prefecture %></td>
+						<td class="align-middle text-center border-bottom" width="300"><%= render "users/relationships/follow_button", user: user %></td>
+						<td class="align-middle text-center border-bottom" width="150"><%= link_to "詳細", users_user_path(user) %></td>
+					</tr>
 				<% end %>
 			</table>
 			<div class="text-right"><%= link_to "=>もっと見る", users_users_path %></div>
