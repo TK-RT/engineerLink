@@ -1,9 +1,9 @@
 class Users::CompaniesController < ApplicationController
 	before_action :authenticate_user!
-	
+
 	def index
 		@q = Company.ransack(params[:q])
-		@companies = @q.result(distinct: true).order(created_at: :"DESC")
+		@companies = @q.result(distinct: true).order(created_at: :"DESC").page(params[:page])
 	end
 
 	def show
