@@ -1,0 +1,47 @@
+<div class="container">
+	<div class="row">
+		<div class="col">
+			
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			
+			<form class="form-inline">
+  				<h2>クチコミ一覧</h2>
+  				<%= search_form_for @q, url: admins_company_evaluations_path(@company) do |f| %>
+	 				<div class="form-group mx-sm-3 mb-2">
+	   					<%= f.search_field :review_cont, class: "form-control" %>
+	    				<%= f.submit "検索", class: "btn btn-primary ml-2" %>
+	  				</div>
+	  			<% end %>
+			</form>
+
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th>クチコミID</th>
+						<th>投稿者</th>
+						<th>クチコミ内容</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @evaluations.each do |evaluation| %>
+						<tr>
+							<td class="align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= evaluation.id %></span></td>
+							<td class="align-middle"><%= evaluation.user.last_name %> <%= evaluation.user.first_name %></td>
+							<td class="align-middle"><%= evaluation.review %></td>
+							<td class="align-middle"><%= link_to "削除", admins_company_evaluation_path(@company, evaluation), method: :delete, data: {confirm: "削除しますか？"},class: "btn btn-danger" %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="col offset-4 mt-5">
+				<%= paginate @evaluations %>
+			</div>
+		</div>
+	</div>
+</div>

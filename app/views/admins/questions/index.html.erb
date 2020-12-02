@@ -1,1 +1,47 @@
-admins/index
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<%= render "admins/list" %>
+		</div>
+	</div>
+
+	<div class="row mt-5">
+		<div class="col">
+			
+			<form class="form-inline">
+  				<h2>質問一覧</h2>
+  				<%= search_form_for @q, url: admins_questions_path do |f| %>
+	 				<div class="form-group mx-sm-3 mb-2">
+	   					<%= f.search_field :question_title_or_question_body_cont, class: "form-control" %>
+	    				<%= f.submit "検索", class: "btn btn-primary ml-2" %>
+	  				</div>
+	  			<% end %>
+			</form>
+
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th>質問タイトル</th>
+						<th>質問者</th>
+						<th>言語ジャンル</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @questions.each do |question| %>
+						<tr class="border-bottom">
+							<td class="align-middle"><span class="d-inline-block text-truncate align-middle" style="max-width: 300px;"><%= question.question_title %></span></td>
+							<td class="align-middle"><%= question.user.last_name %> <%= question.user.first_name %></td>
+							<td class="align-middle"><%= question.programming_language.programming_language %></td>
+							<td class="align-middle"><%= link_to "削除", admins_question_path(question), method: :delete, data: {confirm: "削除しますか？"},class: "btn btn-danger" %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="col offset-4 mt-5">
+				<%= paginate @questions %>
+			</div>
+		</div>
+	</div>
+</div>

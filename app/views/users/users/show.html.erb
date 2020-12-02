@@ -6,7 +6,7 @@
 				<span class="text-center pt-1"><%= attachment_image_tag @user, :profile_image, format: "jpg", size: "240x200", fallback: "no_image.jpg" %></span>
 				<div class="card-body px-2 py-3">
 					<h6 class="card-title text-center"><%= @user.last_name %> <%= @user.first_name %></h5>
-        			<p class="card-text text-center">フォロワー数：<%= @user.followers.count %><br><%= render "users/relationships/follow_button", user: @user %></p>
+        			<p class="card-text text-center"><span id="follow-form-<% @user.id %>"><%= render "users/relationships/follow", user: @user %></span></p>
         		</div>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 				<% else %>
 				<% end %>
 			</div>
-			
+
 			<table class="table table-bordered mt-3">
 				<tr>
 					<th class="table-primary">名前</th>

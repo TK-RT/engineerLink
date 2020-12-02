@@ -1,12 +1,12 @@
 <div class="container">
 	<%= render "users/top/list" %>
 	<div class="row mt-5">
-		
+
 		<div class="col">
 			<table class="table" style="table-layout:fixed;width:100%;">
 				<thead>
 					<tr>
-						<% if @question.user_id == current_user.id %>
+						<% if @question.user_id == current_user.id && @question.best_answer_id.blank? %>
 							<th class="border-top-0" colspan="2"><%= @question.question_title %></th>
 							<td class="border-top-0 text-center" width="110"><%= link_to "編集する", edit_users_question_path(@question), class: "btn btn-primary" %></td>
 						<% else %>

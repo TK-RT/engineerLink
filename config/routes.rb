@@ -16,8 +16,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admins do
+    resources :users
     resources :questions
+    resources :articles
     resources :programming_languages
+    resources :companies do
+      resources :evaluations
+    end
   end
 
   root to: "users/top#top"
